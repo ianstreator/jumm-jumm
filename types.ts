@@ -14,6 +14,7 @@ export type ContentfulProductStructure = {
       image: { fields: { file: { url: string } } }[];
       price: number;
       description: string;
+      subcategory: { title: string; category: { fields: { name: string } } };
     };
   }[];
 };

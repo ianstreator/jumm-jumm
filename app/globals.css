@@ -17,11 +17,22 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  overflow: hidden;
+}
+
+.backdrop {
+  background-image: url("../public/backdrop.svg");
+  background-repeat: repeat-x;
+  
+}
+
+.card-min {
+  min-height: 312px;
+  max-width: 160px;
+}
+.product-image-dimensions {
+  width: 175px;
+  height: 175px;
 }
