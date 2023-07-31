@@ -18,7 +18,7 @@ export default async function Home() {
   );
 }
 
-export const fetchDataFromApi = async () => {
+const fetchDataFromApi = async () => {
   const client = contentful.createClient({
     accessToken: process.env.CDA_TOKEN,
     space: process.env.SPACE_ID,
