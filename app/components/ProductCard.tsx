@@ -1,11 +1,14 @@
+"use client";
 import Image from "next/image";
 import { ProductStructure } from "@/types";
 
 function ProductCard(data: ProductStructure) {
   const { urls, name, price } = data;
 
+  // console.log(data);
+
   return (
-    <div className="card w-44 card-min bg-primary shadow-lg mt-6 overflow-hidden last:ml-auto">
+    <div className="card w-44 card-min bg-primary shadow-lg mt-6 overflow-hidden last:ml-auto md:last:ml-0">
       <div className="carousel w-full">
         {urls.map((url, i) => (
           <div
