@@ -2,12 +2,12 @@
 import Image from "next/image";
 import { useState } from "react";
 
-function Banner(data:any) {
-  console.log(data)
+function Banner(data: any) {
+  // console.log(data)
   return (
     <div className="bg-primary w-full flex items-center justify-between p-2 px-6">
       <button className="btn btn-sm bg-secondary text-white border-none rounded-md">
-      menú
+        menú
       </button>
       <div className="relative">
         <Image
@@ -17,12 +17,7 @@ function Banner(data:any) {
           alt="logo"
         ></Image>
       </div>
-      <Image
-        src={"/basket.svg"}
-        width={50}
-        height={50}
-        alt="basket"
-      ></Image>
+      <Image src={"/basket.svg"} width={50} height={50} alt="basket"></Image>
     </div>
   );
 }

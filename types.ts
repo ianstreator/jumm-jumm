@@ -4,6 +4,14 @@ export type ProductStructure = {
   description?: string;
   price: number;
   urls: string[];
+  categoryName?: string;
+  subcategoryName?: string;
+};
+
+export type Products = {
+  [category: string]: {
+    [subcategory: string]: ProductStructure[];
+  };
 };
 
 export type ContentfulProductStructure = {
