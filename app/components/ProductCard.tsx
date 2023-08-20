@@ -7,21 +7,6 @@ function ProductCard(data: ProductStructure) {
 
   return (
     <div className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 mx-auto overflow-hidden md:last:ml-0">
-      {/* <div className="carousel w-full">
-        {urls.map((url, i) => (
-          <div
-            key={i}
-            className="carousel-item relative product-image-dimensions"
-          >
-            <Image
-              src={`https:${url}`}
-              width={175}
-              height={175}
-              alt={name}
-            ></Image>
-          </div>
-        ))}
-      </div> */}
       <Image src={`https:${urls[0]}`} width={175} height={175} alt={name}></Image>
 
       <div className="card-body p-2 justify-between">
