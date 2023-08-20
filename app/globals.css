@@ -17,20 +17,22 @@
 }
 
 body {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+  background-color: #4a4a4a;
+  color: #4a4a4a;
   overflow: hidden;
+  min-height: 100%;
 }
 
 .backdrop {
   background-image: url("../public/backdrop.svg");
   background-repeat: repeat-x;
-  
 }
 
 .card-min {
-  min-height: 312px;
-  max-width: 160px;
+  min-width: 350px;
+  max-width: 350px;
+  min-height: 175px;
+  max-height: 175px;
 }
 .product-image-dimensions {
   width: 175px;
