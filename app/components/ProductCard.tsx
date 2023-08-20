@@ -5,11 +5,9 @@ import { ProductStructure } from "@/types";
 function ProductCard(data: ProductStructure) {
   const { urls, name, price } = data;
 
-  // console.log(data);
-
   return (
-    <div className="card w-44 card-min bg-primary shadow-lg mt-6 overflow-hidden last:ml-auto md:last:ml-0">
-      <div className="carousel w-full">
+    <div className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 mx-auto overflow-hidden md:last:ml-0">
+      {/* <div className="carousel w-full">
         {urls.map((url, i) => (
           <div
             key={i}
@@ -23,7 +21,8 @@ function ProductCard(data: ProductStructure) {
             ></Image>
           </div>
         ))}
-      </div>
+      </div> */}
+      <Image src={`https:${urls[0]}`} width={175} height={175} alt={name}></Image>
 
       <div className="card-body p-2 justify-between">
         <div>
