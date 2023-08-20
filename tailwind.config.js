@@ -29,7 +29,7 @@ module.exports = {
 
           "base-100": "#423e56",
 
-          info: "#6c96d5",
+          info: "#FED7AA",
 
           success: "#57e5c4",
 
@@ -48,7 +48,7 @@ module.exports = {
 
           "base-100": "#423e56",
 
-          info: "#6c96d5",
+          info: "#FED7AA",
 
           success: "#57e5c4",
 
@@ -59,7 +59,7 @@ module.exports = {
         dark: {
           primary: "#94A3B8",
 
-          secondary: "#0F172A",
+          secondary: "#334155",
 
           accent: "#334155",
 
@@ -67,7 +67,7 @@ module.exports = {
 
           "base-100": "#423e56",
 
-          info: "#6c96d5",
+          info: "#FED7AA",
 
           success: "#57e5c4",
 
