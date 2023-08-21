@@ -6,7 +6,7 @@ function ProductCard(data: ProductStructure) {
   const { urls, name, price } = data;
 
   return (
-    <div className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 mx-auto overflow-hidden md:last:ml-0">
+    <div key={name} id={name} className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 mx-auto overflow-hidden">
       <Image src={`https:${urls[0]}`} width={175} height={175} alt={name}></Image>
 
       <div className="card-body p-2 justify-between">
