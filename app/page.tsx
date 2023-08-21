@@ -4,35 +4,15 @@ import {
   ContentfulProductStructure,
   Products,
 } from "@/types";
-import Banner from "./components/Banner";
-import ProductCard from "./components/ProductCard";
+import Client from "./components/Client";
+
 export default async function Home() {
+
   const products = await fetchContentful();
+
   return (
     <main className="relative max-h-screen flex flex-col items-center justify-between overflow-hidden">
-      <Banner {...products} />
-
-      <div className="bg-accent backdrop overflow-scroll relative">
-        {Object.entries(products).map(([category, subcategories], i) => (
-          <div className="relative">
-            <h1 className="sticky top-0 z-30 font-bold text-white bg-secondary text-2xl text-end w-full p-2 px-4">
-              {category}
-            </h1>
-            {Object.entries(subcategories).map(([subcategory, products]) => (
-              <div className="relative">
-                <h3 className="sticky top-0 z-50 font-light text-2xl p-2 px-4 rounded-r-md bg-info w-fit">
-                  {subcategory}
-                </h3>
-                <div className="flex flex-wrap px-6 pb-6 justify-start">
-                  {products.map((product, i) => (
-                    <ProductCard key={i} {...product} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      <Client {...products} />
     </main>
   );
 }
