@@ -27,6 +27,7 @@ function Menu(products: Products) {
               <a
                 href={`#${Object.values(subcategories)[0][0].name}`}
                 onClick={() => setMenuState(!menuState)}
+                className="font-bold"
               >
                 {category}
               </a>
@@ -49,17 +50,29 @@ function Menu(products: Products) {
             </li>
           );
         })}
-        <ul className="border border-b-transparent border-x-transparent border-t-gray-50">
+        <ul className="border border-b-transparent border-x-transparent border-t-gray-50 mt-4">
           <li>
-            <a className="pointer-events-none">Theme</a>
-            <ul>
-              <li>
+            <a className="pointer-events-none font-bold">Theme</a>
+            <ul className="flex flex-row">
+              <li
+                className={`${
+                  theme === "dark" && "bg-green-300 text-neutral rounded-md"
+                }`}
+              >
                 <a onClick={() => setTheme("dark")}>Dark</a>
               </li>
-              <li>
+              <li
+                className={`${
+                  theme === "pink" && "bg-green-300 text-neutral rounded-md"
+                }`}
+              >
                 <a onClick={() => setTheme("pink")}>Pink</a>
               </li>
-              <li>
+              <li
+                className={`${
+                  theme === "blue" && "bg-green-300 text-neutral rounded-md"
+                }`}
+              >
                 <a onClick={() => setTheme("blue")}>Blue</a>
               </li>
             </ul>
