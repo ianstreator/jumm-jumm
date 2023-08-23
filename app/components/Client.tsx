@@ -14,7 +14,8 @@ function Client(products: Products) {
 
   return (
     <>
-      {menuState && <Menu {...products} />}
+      <Menu {...products} />
+      {/* {menuState && <Menu {...products} />} */}
       <Navbar {...products} />
 
       <CategorizedProducts {...products} />

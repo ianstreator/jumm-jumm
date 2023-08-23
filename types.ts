@@ -4,13 +4,27 @@ export type ProductStructure = {
   description?: string;
   price: number;
   urls: string[];
-  categoryName?: string;
-  subcategoryName?: string;
+  categoryName: string;
+  subcategoryName: string;
 };
 
 export type Products = {
   [category: string]: {
     [subcategory: string]: ProductStructure[];
+  };
+};
+
+export type CartProduct = {
+  name: string;
+  price: number;
+  count: number;
+  categoryName?: string;
+  subcategoryName?: string;
+};
+
+export type CartProducts = {
+  [categoryName: string]: {
+    [subcategoryName: string]: { [name: string]: CartProduct };
   };
 };
 

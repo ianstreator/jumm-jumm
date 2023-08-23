@@ -13,14 +13,14 @@ function Menu(products: Products) {
   }, [theme]);
 
   return (
-    <div className="absolute right-40 top-0 bottom-0 z-50 h-full w-full bg-secondary">
+    <div className={`absolute left-0 top-0 z-50 h-full w-fit bg-secondary ${menuState ? "-left-60" : "left-0"} `}>
       <IoMdClose
         onClick={() => setMenuState(!menuState)}
         color="white"
         size={40}
-        className="absolute top-0 right-0 m-2"
+        className="absolute top-0 right-0 m-2 cursor-pointer"
       />
-      <ul className="menu text-white pl-40">
+      <ul className="menu text-white">
         {Object.entries(products).map(([category, subcategories], i) => {
           return (
             <li key={i} className="w-1/2">

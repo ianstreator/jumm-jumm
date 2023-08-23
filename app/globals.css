@@ -17,6 +17,7 @@
 }
 * {
   scroll-behavior: smooth;
+  transition: 400ms;
 }
 body {
   background-color: #4a4a4a;
