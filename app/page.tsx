@@ -4,15 +4,21 @@ import {
   ContentfulProductStructure,
   Products,
 } from "@/types";
-import Client from "./components/Client";
+
+import CategorizedProducts from "./components/CategorizedProducts";
+import Navbar from "./components/Navbar";
+import Menu from "./components/Menu";
+import Cart from "./components/Cart";
 
 export default async function Home() {
-
   const products = await fetchContentful();
 
   return (
     <main className="relative max-h-screen flex flex-col items-center justify-between overflow-hidden">
-      <Client {...products} />
+      <Menu {...products} />
+      <Cart />
+      <Navbar />
+      <CategorizedProducts {...products} />
     </main>
   );
 }
@@ -50,6 +56,7 @@ const fetchContentful = async () => {
       i
     ) => {
       const urls = image.map((img) => img.fields.file.url);
+      const count = 0;
 
       return {
         name,
@@ -59,6 +66,7 @@ const fetchContentful = async () => {
         available,
         subcategoryName,
         categoryName,
+        count,
       };
     }
   );
@@ -68,9 +76,6 @@ const fetchContentful = async () => {
   items.forEach((item) => {
     const { categoryName, subcategoryName } = item;
     const product = { ...item };
-
-    delete product.categoryName;
-    delete product.subcategoryName;
 
     if (!products[categoryName!]) {
       products[categoryName!] = {};
