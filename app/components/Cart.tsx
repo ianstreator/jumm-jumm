@@ -50,8 +50,8 @@ function Cart() {
             {Object.entries(cartProducts).map(
               ([category, subcategories], i) => {
                 return (
-                  <li key={i} className="font-bold">
-                    <p className="text-xl active">
+                  <li key={i} className="font-bold text-neutral">
+                    <p className="text-xl">
                     {category}
 
                     </p>
