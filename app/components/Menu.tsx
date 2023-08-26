@@ -8,12 +8,18 @@ import { IoMdClose } from "react-icons/io";
 function Menu(products: Products) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
+  const themes = ["dark", "pink", "blue"];
+
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
-    <div className={`absolute left-0 top-0 z-50 h-full w-fit bg-secondary ${menuState ? "-left-60" : "left-0"} `}>
+    <div
+      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${
+        menuState ? "left-0" : "-left-full"
+      } `}
+    >
       <IoMdClose
         onClick={() => setMenuState(!menuState)}
         color="white"
@@ -27,7 +33,7 @@ function Menu(products: Products) {
               <a
                 href={`#${Object.values(subcategories)[0][0].name}`}
                 onClick={() => setMenuState(!menuState)}
-                className="font-bold"
+                className="font-bold text-xl active"
               >
                 {category}
               </a>
@@ -39,6 +45,7 @@ function Menu(products: Products) {
                         <a
                           href={`#${products[0].name}`}
                           onClick={() => setMenuState(!menuState)}
+                          className="font-bold active"
                         >
                           {subcategory}
                         </a>
@@ -54,27 +61,17 @@ function Menu(products: Products) {
           <li>
             <a className="pointer-events-none font-bold">Theme</a>
             <ul className="flex flex-row">
-              <li
-                className={`${
-                  theme === "dark" && "bg-green-300 text-neutral rounded-md"
-                }`}
-              >
-                <a onClick={() => setTheme("dark")}>Dark</a>
-              </li>
-              <li
-                className={`${
-                  theme === "pink" && "bg-green-300 text-neutral rounded-md"
-                }`}
-              >
-                <a onClick={() => setTheme("pink")}>Pink</a>
-              </li>
-              <li
-                className={`${
-                  theme === "blue" && "bg-green-300 text-neutral rounded-md"
-                }`}
-              >
-                <a onClick={() => setTheme("blue")}>Blue</a>
-              </li>
+              {themes.map((currTheme, i) => (
+                <li
+                  key={i}
+                  className={`${
+                    theme === currTheme &&
+                    "bg-green-300 text-neutral rounded-md"
+                  }`}
+                >
+                  <a onClick={() => setTheme(currTheme)}>{currTheme}</a>
+                </li>
+              ))}
             </ul>
           </li>
         </ul>
