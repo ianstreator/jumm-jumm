@@ -18,8 +18,9 @@ export type CartProduct = {
   name: string;
   price: number;
   count: number;
-  categoryName?: string;
-  subcategoryName?: string;
+  urls: string[];
+  categoryName: string;
+  subcategoryName: string;
 };
 
 export type CartProducts = {
