@@ -4,11 +4,13 @@ import {
   ContentfulProductStructure,
   Products,
 } from "@/types";
+import "react-toastify/dist/ReactToastify.css";
 
 import CategorizedProducts from "./components/CategorizedProducts";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Cart from "./components/Cart";
+import { ToastContainer } from "react-toastify";
 
 export default async function Home() {
   const products = await fetchContentful();
@@ -19,6 +21,12 @@ export default async function Home() {
       <Cart />
       <Navbar />
       <CategorizedProducts {...products} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        closeButton={false}
+        theme="dark"
+      />
     </main>
   );
 }
