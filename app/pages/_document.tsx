@@ -11,7 +11,7 @@ export default function Document({
 }) {
   return (
     <AppContextProvider>
-      <html lang="en" data-theme="dark">
+      <html lang="en" data-theme="Oscura">
         <head>
           <link rel="icon" href="/images/favicon.png" sizes="any" />
         </head>
