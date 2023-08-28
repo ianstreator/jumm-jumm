@@ -5,7 +5,8 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../context";
 
 function ProductCard(product: ProductStructure) {
-  const { urls, name, price, categoryName, subcategoryName } = product;
+  const { urls, name, price, available, categoryName, subcategoryName } =
+    product;
 
   const { addProductToCart } = useContext(AppContext);
 
@@ -21,7 +22,7 @@ function ProductCard(product: ProductStructure) {
     <div
       key={name}
       id={name}
-      className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 mx-auto overflow-hidden"
+      className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 overflow-hidden md:mr-4"
     >
       <Image
         src={`https:${urls[0]}`}
@@ -37,15 +38,19 @@ function ProductCard(product: ProductStructure) {
         </div>
 
         <button
-          onClick={() => addProductToCart(cartProduct)}
+          onClick={() => available && addProductToCart(cartProduct)}
           className="btn btn-sm bg-secondary border-none text-xs text-white"
         >
-          <Image
-            src={"/basket-plus.svg"}
-            width={30}
-            height={30}
-            alt="basket-plus"
-          ></Image>
+          {available ? (
+            <Image
+              src={"/basket-plus.svg"}
+              width={30}
+              height={30}
+              alt="basket-plus"
+            ></Image>
+          ) : (
+            <p>Out of stock</p>
+          )}
         </button>
       </div>
     </div>
