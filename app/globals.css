@@ -1,10 +1,6 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
-
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind utilities;
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -60,8 +56,8 @@ body {
 }
 
 .cart-copied {
-  @apply !bg-secondary text-center !text-white; 
+  @apply !bg-secondary text-center !text-white;
 }
 .progress-copied {
-  @apply !bg-accent
+  @apply !bg-accent;
 }

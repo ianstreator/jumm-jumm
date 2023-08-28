@@ -1,5 +1,6 @@
 import { CartProduct, CartProducts, ProductStructure } from "@/types";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { setCookie } from "cookies-next";
 
 type ContextProps = {
   children: React.ReactNode;
@@ -22,11 +23,18 @@ type Context = {
 export const AppContext = createContext({} as Context);
 
 export const AppContextProvider = ({ children }: ContextProps) => {
-  const [theme, setTheme] = useState("Oscura");
+  const [theme, setTheme] = useState("");
   const [menuState, setMenuState] = useState(false);
   const [cartState, setCartState] = useState(false);
   const [cartProducts, setCartProducts] = useState<CartProducts>({});
   const [cartTotal, setCartTotal] = useState(0);
+
+  useEffect(() => {
+    if (theme) {
+      setCookie("theme", theme);
+      document.querySelector("html")?.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
 
   const addProductToCart = (product: ProductStructure) => {
     const { name, price, categoryName, subcategoryName } = product;

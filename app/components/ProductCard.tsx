@@ -49,7 +49,7 @@ function ProductCard(product: ProductStructure) {
               alt="basket-plus"
             ></Image>
           ) : (
-            <p>Out of stock</p>
+            <p>Agotado</p>
           )}
         </button>
       </div>

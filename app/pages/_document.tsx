@@ -3,19 +3,21 @@ import { AppContextProvider } from "../context";
 import { NextFont } from "next/dist/compiled/@next/font";
 
 export default function Document({
-  inter,
+  imprima,
   children,
+  theme,
 }: {
   children: React.ReactNode;
-  inter: NextFont;
+  imprima: NextFont;
+  theme: string;
 }) {
   return (
     <AppContextProvider>
-      <html lang="en" data-theme="Oscura">
+      <html lang="en" data-theme={theme}>
         <head>
           <link rel="icon" href="/images/favicon.png" sizes="any" />
         </head>
-        <body className={inter.className}>{children}</body>
+        <body className={imprima.className}>{children}</body>
       </html>
     </AppContextProvider>
   );

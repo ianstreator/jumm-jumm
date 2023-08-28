@@ -49,7 +49,7 @@ function Navbar() {
       <div
         onClick={() => {
           if (!Object.keys(cartProducts).length)
-            return alert("Add items to view cart!");
+            return alert("¡Agregue artículos para ver el carrito!");
           setCartState(true);
           setMenuState(false);
         }}

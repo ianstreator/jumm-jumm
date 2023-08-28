@@ -20,7 +20,7 @@ function CartProduct(product: CartProduct) {
           onClick={() => {
             if (count < 2) {
               return (
-                confirm("Remove product from cart?") &&
+                confirm("¿Quitar artículo del carrito?") &&
                 decreaseProductCartCount(product)
               );
             }

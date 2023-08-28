@@ -31,6 +31,7 @@ export default async function Home() {
   );
 }
 
+
 const fetchContentful = async () => {
   const client = contentful.createClient({
     accessToken: process.env.CDA_TOKEN,
