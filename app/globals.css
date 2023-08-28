@@ -1,6 +1,10 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -33,6 +37,11 @@ body {
   background-color: transparent !important;
   color: white !important;
 }
+.active-dark {
+  background-color: transparent !important;
+  color: #231b31 !important;
+  cursor: default !important;
+}
 
 .backdrop {
   background-image: url("../public/backdrop.svg");
@@ -48,4 +57,11 @@ body {
 .product-image-dimensions {
   width: 175px;
   height: 175px;
+}
+
+.cart-copied {
+  @apply !bg-secondary text-center !text-white; 
+}
+.progress-copied {
+  @apply !bg-accent
 }
