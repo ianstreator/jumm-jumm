@@ -8,7 +8,7 @@ import { IoMdClose } from "react-icons/io";
 function Menu(products: Products) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
-  const themes = ["dark", "pink", "blue"];
+  const themes = ["Oscura", "Rosa", "Azul"];
 
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
@@ -21,7 +21,7 @@ function Menu(products: Products) {
       } `}
     >
       <IoMdClose
-        onClick={() => setMenuState(!menuState)}
+        onClick={() => setMenuState(false)}
         color="white"
         size={40}
         className="absolute top-0 right-0 m-2 cursor-pointer"
@@ -32,7 +32,7 @@ function Menu(products: Products) {
             <li key={i} className="w-1/2">
               <a
                 href={`#${Object.values(subcategories)[0][0].name}`}
-                onClick={() => setMenuState(!menuState)}
+                onClick={() => setMenuState(false)}
                 className="font-bold text-xl active"
               >
                 {category}
@@ -44,7 +44,7 @@ function Menu(products: Products) {
                       <li key={i}>
                         <a
                           href={`#${products[0].name}`}
-                          onClick={() => setMenuState(!menuState)}
+                          onClick={() => setMenuState(false)}
                           className="font-bold active"
                         >
                           {subcategory}
