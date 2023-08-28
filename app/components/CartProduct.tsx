@@ -26,7 +26,7 @@ function CartProduct(product: CartProduct) {
             }
             decreaseProductCartCount(product);
           }}
-          className="btn btn-lg w-10 text-white rounded-none border-none p-1 transform-none bg-secondary pointer-events-auto"
+          className="btn btn-lg rounded-r-none w-10 text-white  border-none p-1 transform-none bg-secondary"
         >
           {count < 2 ? (
             <AiOutlineDelete size={20} />
@@ -36,17 +36,17 @@ function CartProduct(product: CartProduct) {
         </button>
         <div
           onClick={() => setImage(!image)}
-          className="flex flex-row py-2 font-normal items-center justify-center text-neutral bg-primary"
+          className="flex flex-row py-2 items-center justify-center text-neutral"
         >
-          <p className="w-40 h-10 pl-4 whitespace-normal text-start font-bold flex items-center justify-start">
+          <p className="w-40 h-10 pl-2 whitespace-normal text-start font-bold flex items-center justify-start cursor-pointer">
             {name}
           </p>
-          <p className="w-8 text-xl ml-2">{`x${count}`}</p>
+          <p className="w-8 text-xl mx-2">{`x${count}`}</p>
         </div>
 
         <button
           onClick={() => increaseProductCartCount(product)}
-          className="btn btn-lg w-10 text-white rounded-none border-none p-1 transform-none bg-secondary pointer-events-auto"
+          className="btn btn-lg rounded-l-none w-10 text-white border-none p-1 transform-none bg-secondary"
         >
           <AiOutlinePlus size={20} />
         </button>

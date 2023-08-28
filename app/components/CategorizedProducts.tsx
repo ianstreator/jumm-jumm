@@ -13,11 +13,11 @@ function CategorizedProducts(products: Products) {
 
           {Object.entries(subcategories).map(([subcategory, products],i) => (
             <div key={i} id={products[0].name} className="relative">
-              <h3 className="sticky top-0 z-30 font-light text-2xl p-2 px-4 rounded-r-md bg-info w-fit">
+              <h3 className="sticky top-0 z-30 font-med text-2xl p-2 px-4 bg-gradient-to-r from-info to-transparent w-2/3">
                 {subcategory}
               </h3>
 
-              <div className="flex flex-wrap px-6 pb-6 justify-start">
+              <div className="flex flex-wrap px-6 pb-6 justify-center md:justify-start">
                 {products.map((product, i) => (
                   <ProductCard key={i} {...product} />
                 ))}
