@@ -32,7 +32,7 @@ function Navbar() {
       <button
         className="btn btn-sm bg-secondary text-white border-none rounded-md"
         onClick={() => {
-          setMenuState(!menuState);
+          setMenuState(true);
           setCartState(false);
         }}
       >
@@ -50,7 +50,7 @@ function Navbar() {
         onClick={() => {
           if (!Object.keys(cartProducts).length)
             return alert("Add items to view cart!");
-          setCartState(!cartState);
+          setCartState(true);
           setMenuState(false);
         }}
         className="relative flex flex-row cursor-pointer"
