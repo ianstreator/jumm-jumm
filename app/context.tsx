@@ -22,7 +22,7 @@ type Context = {
 export const AppContext = createContext({} as Context);
 
 export const AppContextProvider = ({ children }: ContextProps) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("Oscura");
   const [menuState, setMenuState] = useState(false);
   const [cartState, setCartState] = useState(false);
   const [cartProducts, setCartProducts] = useState<CartProducts>({});
