@@ -18,7 +18,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        pink: {
+        Rosa: {
           primary: "#FEF2F2",
 
           secondary: "#FCA5A5",
@@ -37,7 +37,7 @@ module.exports = {
 
           error: "#ee4f49",
         },
-        blue: {
+        Azul: {
           primary: "#EFF6FF",
 
           secondary: "#93C5FD",
@@ -56,12 +56,12 @@ module.exports = {
 
           error: "#ee4f49",
         },
-        dark: {
+        Oscura: {
           primary: "#94A3B8",
 
           secondary: "#334155",
 
-          accent: "#334155",
+          accent: "#CBD5E1",
 
           neutral: "#231b31",
 
