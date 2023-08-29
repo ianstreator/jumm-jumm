@@ -55,7 +55,7 @@ function Menu(products: Products) {
         })}
         <ul className="border border-b-transparent border-x-transparent border-t-gray-50 mt-4">
           <li>
-            <a className="pointer-events-none font-bold">Theme</a>
+            <a className="pointer-events-none font-bold">Tema</a>
             <ul className="flex flex-row">
               {themes.map((currTheme, i) => (
                 <li

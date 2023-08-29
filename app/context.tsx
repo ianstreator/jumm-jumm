@@ -36,6 +36,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     }
   }, [theme]);
 
+
   const addProductToCart = (product: ProductStructure) => {
     const { name, price, categoryName, subcategoryName } = product;
 

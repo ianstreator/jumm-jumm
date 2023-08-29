@@ -16,8 +16,9 @@ function Cart() {
 
   useEffect(() => {
     if (!Object.keys(cartProducts).length) setCartState(false);
-    setCartList("Cart Total: $" + cartTotal.toFixed(2).toString());
+    setCartList("Carrito total: $" + cartTotal.toFixed(2).toString());
     Object.entries(cartProducts).forEach(([category, subcategories]) => {
+      setCartList((curr) => curr.concat("\n"));
       setCartList((curr) => curr.concat("\n"));
       setCartList((curr) => curr.concat(category.toUpperCase() + "\n"));
       Object.entries(subcategories).forEach(([subcategory, products]) => {

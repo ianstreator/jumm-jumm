@@ -27,6 +27,8 @@ html,
 body {
   background-color: #4a4a4a;
   color: #262626;
+  overflow: hidden;
+  height: 100dvh;
 }
 
 .active {
@@ -56,8 +58,9 @@ body {
 }
 
 .cart-copied {
-  @apply !bg-secondary text-center !text-white;
+  @apply !bg-secondary/60 backdrop-blur-sm text-center !text-white w-80 mx-auto !mb-4 !rounded-md;
 }
+
 .progress-copied {
   @apply !bg-accent;
 }
