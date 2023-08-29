@@ -16,21 +16,21 @@ export default async function Home() {
   const products = await fetchContentful();
 
   return (
-    <main className="relative max-h-screen flex flex-col items-center justify-between overflow-hidden">
+    <main className="relative h-full flex flex-col items-center justify-between">
+      <Navbar />
       <Menu {...products} />
       <Cart />
-      <Navbar />
       <CategorizedProducts {...products} />
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
         closeButton={false}
         theme="dark"
+        limit={1}
       />
     </main>
   );
 }
-
 
 const fetchContentful = async () => {
   const client = contentful.createClient({
