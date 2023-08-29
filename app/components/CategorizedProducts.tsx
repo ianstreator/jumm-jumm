@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 
 function CategorizedProducts(products: Products) {
   return (
-    <div className="bg-accent backdrop overflow-y-scroll grow relative">
+    <div className="overflow-y-scroll grow relative">
       {Object.entries(products).map(([category, subcategories], i) => (
         <div key={i}>
           <h1 className="sticky top-0 z-30 font-bold text-white bg-secondary text-2xl text-end w-full p-2 px-4">

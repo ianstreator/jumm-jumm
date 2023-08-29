@@ -16,7 +16,7 @@ export default async function Home() {
   const products = await fetchContentful();
 
   return (
-    <main className="relative h-full flex flex-col items-center justify-between">
+    <main className="relative h-full flex flex-col items-center justify-between backdrop bg-accent md:px-40">
       <Navbar />
       <Menu {...products} />
       <Cart />
