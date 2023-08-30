@@ -19,13 +19,13 @@ module.exports = {
     themes: [
       {
         Rosa: {
-          primary: "#FEF2F2",
+          primary: "#FFE4E6",
 
-          secondary: "#FCA5A5",
+          secondary: "#FDA4AF",
 
-          accent: "#FEE2E2",
+          accent: "#FECDD3",
 
-          neutral: "#231b31",
+          neutral: "#262626",
 
           "base-100": "#423e56",
 
@@ -38,13 +38,13 @@ module.exports = {
           error: "#ee4f49",
         },
         Azul: {
-          primary: "#EFF6FF",
+          primary: "#DBEAFE",
 
           secondary: "#93C5FD",
 
-          accent: "#DBEAFE",
+          accent: "#BFDBFE",
 
-          neutral: "#231b31",
+          neutral: "#262626",
 
           "base-100": "#423e56",
 
@@ -57,13 +57,13 @@ module.exports = {
           error: "#ee4f49",
         },
         Oscura: {
-          primary: "#94A3B8",
+          primary: "#CBD5E1",
 
           secondary: "#334155",
+          
+          accent: "#94A3B8",
 
-          accent: "#CBD5E1",
-
-          neutral: "#231b31",
+          neutral: "#262626",
 
           "base-100": "#423e56",
 

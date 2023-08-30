@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { AppContext } from "../context";
 
 function Navbar() {
-  const { menuState, setMenuState, cartState, setCartState, cartProducts } =
-    useContext(AppContext);
+  const { setMenuState, setCartState, cartProducts } = useContext(AppContext);
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
@@ -55,12 +54,7 @@ function Navbar() {
         }}
         className="relative flex flex-row cursor-pointer"
       >
-        <Image
-          src={"/basket.svg"}
-          width={50}
-          height={50}
-          alt="basket"
-        ></Image>
+        <Image src={"/basket.svg"} width={50} height={50} alt="basket"></Image>
         {cartCount > 0 && (
           <div className="absolute left-6 rounded-full bg-secondary text-white flex flex-col justify-center items-center w-8 h-8 p-3">
             {cartCount}

@@ -1,7 +1,6 @@
 "use client";
 import { Products } from "@/types";
 import ProductCard from "./ProductCard";
-import Navbar from "./Navbar";
 
 function CategorizedProducts(products: Products) {
   return (
