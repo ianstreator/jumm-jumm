@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Imprima } from "next/font/google";
 const imprima = Imprima({
@@ -25,6 +26,7 @@ export default async function RootLayout({
   return (
     <Document theme={theme || "Oscura"} imprima={imprima}>
       {children}
+      <Analytics />
     </Document>
   );
 }
