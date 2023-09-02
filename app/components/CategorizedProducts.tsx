@@ -4,10 +4,10 @@ import ProductCard from "./ProductCard";
 
 function CategorizedProducts(products: Products) {
   return (
-    <div className="overflow-y-scroll grow relative">
+    <div className="overflow-y-scroll grow relative w-full">
       {Object.entries(products).map(([category, subcategories], i) => (
         <div key={i}>
-          <h1 className="sticky top-0 z-30 font-bold text-white bg-secondary text-2xl text-end w-full p-2 px-4">
+          <h1 className="sticky top-0 z-30 font-bold text-white bg-secondary text-2xl text-end w-full p-2 px-4 shadow-md">
             {category}
           </h1>
 
@@ -16,8 +16,7 @@ function CategorizedProducts(products: Products) {
               <h3 className="sticky top-0 z-30 font-med text-2xl p-2 px-4 bg-info w-2/3">
                 {subcategory}
               </h3>
-
-              <div className="flex flex-wrap px-6 pb-6 justify-center md:justify-start">
+              <div className="relative w-full flex flex-wrap p-6 justify-center md:justify-start">
                 {products.map((product, i) => (
                   <ProductCard key={i} {...product} />
                 ))}

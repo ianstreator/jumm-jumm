@@ -16,14 +16,15 @@ function Cart() {
 
   useEffect(() => {
     if (!Object.keys(cartProducts).length) setCartState(false);
-    setCartList("Carrito total: $" + cartTotal.toFixed(2).toString());
+    setCartList("Carrito total: $" + cartTotal.toFixed(2).toString() + "\n");
     Object.entries(cartProducts).forEach(([category, subcategories]) => {
-      setCartList((curr) => curr.concat("\n"));
-      setCartList((curr) => curr.concat("\n"));
-      setCartList((curr) => curr.concat(category.toUpperCase() + "\n"));
+      setCartList((curr) =>
+        curr.concat("\n").concat(category.toUpperCase() + "\n")
+      );
       Object.entries(subcategories).forEach(([subcategory, products]) => {
-        setCartList((curr) => curr.concat("\n"));
-        setCartList((curr) => curr.concat("  " + subcategory + "\n"));
+        setCartList((curr) =>
+          curr.concat("\n").concat("  " + subcategory + "\n")
+        );
         Object.values(products).forEach(({ name, count }) => {
           setCartList((curr) =>
             curr.concat("    " + `${count}x  ` + name + "\n")
@@ -35,12 +36,12 @@ function Cart() {
 
   return (
     <div
-      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-accent shadow-xl ${
+      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${
         cartState ? "right-0" : "-right-full"
       } `}
     >
       <div className="relative overflow-y-scroll w-full h-full">
-        <div className="sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary">
+        <div className="sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary shadow-md">
           <div className="flex flex-row p-2 w-full items-center justify-between">
             <div className="relative">
               <Image

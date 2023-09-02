@@ -1,6 +1,6 @@
 "use client";
 import { Products } from "@/types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../context";
 
 import { IoMdClose } from "react-icons/io";
@@ -9,7 +9,7 @@ function Menu(products: Products) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
   const themes = ["Oscura", "Rosa", "Azul"];
-  
+
   return (
     <div
       className={`absolute custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${

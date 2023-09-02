@@ -1,6 +1,6 @@
 import { CartProduct, CartProducts, ProductStructure } from "@/types";
 import { createContext, useState, useEffect } from "react";
-import { setCookie } from "cookies-next";
+import { setCookie, getCookie } from "cookies-next";
 
 type ContextProps = {
   children: React.ReactNode;
@@ -30,12 +30,20 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    if (theme) {
+    if (theme !== "") {
       setCookie("theme", theme);
       document.querySelector("html")?.setAttribute("data-theme", theme);
     }
   }, [theme]);
 
+  useEffect(() => {
+    const savedTheme = getCookie("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme("Oscura");
+    }
+  }, []);
 
   const addProductToCart = (product: ProductStructure) => {
     const { name, price, categoryName, subcategoryName } = product;
@@ -99,9 +107,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
         return {
           ...curr,
         };
-      } else {
       }
-
       return {
         ...curr,
         [categoryName]: {
