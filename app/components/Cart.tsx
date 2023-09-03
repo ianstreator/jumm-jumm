@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 import { IoMdClose } from "react-icons/io";
 import { BsReverseListColumnsReverse } from "react-icons/bs";
+import { AiOutlineInstagram, AiOutlineWhatsApp } from "react-icons/ai";
+
 import CartProduct from "./CartProduct";
 
 function Cart() {
@@ -40,9 +42,9 @@ function Cart() {
         cartState ? "right-0" : "-right-full"
       } `}
     >
-      <div className="relative overflow-y-scroll w-full h-full">
+      <div className="relative flex flex-col overflow-y-scroll w-full h-full">
         <div className="sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary shadow-md">
-          <div className="flex flex-row p-2 w-full items-center justify-between">
+          <div className="flex flex-row p-2 pb-0 w-full items-center justify-between">
             <div className="relative">
               <Image
                 onClick={() => setCartState(false)}
@@ -68,40 +70,71 @@ function Cart() {
                 progressClassName: "progress-copied",
               });
             }}
-            className="btn btn-sm border-none bg-secondary w-full text-white"
+            className="btn btn-sm border-none my-4 bg-secondary w-full text-white"
           >
-            Copiar
+            copiar lista
             <BsReverseListColumnsReverse />
           </button>
+          <div className="flex flex-row w-full justify-between">
+            <a href="https://ig.me/m/jummjumm.shop/" target="_blank">
+              <button className="relative w-40 btn btn-md border-none overflow-hidden rounded-md bg-transparent hover:bg-white">
+                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-fuchsia-700 to-amber-300 opacity-50"></div>
+                <div className="z-50 w-full flex justify-between items-center text-white !font-extrabold">
+                  Instagram
+                  <AiOutlineInstagram size={30} />
+                </div>
+              </button>
+            </a>
+            <a
+              href={`https://api.whatsapp.com/send?phone=584125868522&text=${encodeURIComponent(
+                cartList
+              )}`}
+              target="_blank"
+            >
+              <button className="relative overflow-hidden btn btn-md border-none rounded-md bg-transparent hover:bg-white justify-between w-40">
+                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-emerald-700 to-green-400 opacity-50"></div>
+                <div className="z-50 w-full flex justify-between items-center text-white font-extrabold">
+                  WhatsApp
+                  <AiOutlineWhatsApp size={30} />
+                </div>
+              </button>
+            </a>
+          </div>
         </div>
-        <div className="relative overflow-y-scroll">
-          <ul className="menu active text-white">
-            {Object.entries(cartProducts).map(
-              ([category, subcategories], i) => (
-                <li key={i}>
-                  <p className="active-dark font-bold text-xl">{category}</p>
+        <div className="relative flex flex-col overflow-y-scroll">
+          <div className="relative w-full grow">
+            <div className="fixed bottom-0 w-full h-10 bg-gradient-to-t from-primary to-transparent z-50"></div>
 
-                  <ul>
-                    {Object.entries(subcategories).map(
-                      ([subcategory, products], i) => (
-                        <li key={i}>
-                          <p className="active-dark font-bold">{subcategory}</p>
+            <ul className="menu active text-white mb-6">
+              {Object.entries(cartProducts).map(
+                ([category, subcategories], i) => (
+                  <li key={i}>
+                    <p className="active-dark font-bold text-xl">{category}</p>
 
-                          <ul>
-                            {Object.values(products).map((product, i) => (
-                              <li key={i}>
-                                <CartProduct {...product} />
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </li>
-              )
-            )}
-          </ul>
+                    <ul>
+                      {Object.entries(subcategories).map(
+                        ([subcategory, products], i) => (
+                          <li key={i}>
+                            <p className="active-dark font-bold">
+                              {subcategory}
+                            </p>
+
+                            <ul>
+                              {Object.values(products).map((product, i) => (
+                                <li key={i}>
+                                  <CartProduct {...product} />
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
