@@ -75,8 +75,11 @@ function Cart() {
             copiar lista
             <BsReverseListColumnsReverse />
           </button>
-          <div className="flex flex-row w-full justify-between">
-            <a href="https://ig.me/m/jummjumm.shop/" target="_blank">
+          <div className="flex flex-row w-full justify-end">
+            {/*
+                  IG.ME LINK BUG WHEN CLICKED IN EMBEDDED VIEW
+            */}
+            {/* <a href={"https://ig.me/m/jummjumm.shop/"} target="_blank">
               <button className="relative w-40 btn btn-md border-none overflow-hidden rounded-md bg-transparent hover:bg-white">
                 <div className="absolute z-10 inset-0 bg-gradient-to-tr from-fuchsia-700 to-amber-300 opacity-50"></div>
                 <div className="z-50 w-full flex justify-between items-center text-white !font-extrabold">
@@ -84,18 +87,19 @@ function Cart() {
                   <AiOutlineInstagram size={30} />
                 </div>
               </button>
-            </a>
+            </a> */}
             <a
               href={`https://api.whatsapp.com/send?phone=584125868522&text=${encodeURIComponent(
                 cartList
               )}`}
               target="_blank"
+              className="w-40"
             >
-              <button className="relative overflow-hidden btn btn-md border-none rounded-md bg-transparent hover:bg-white justify-between w-40">
-                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-emerald-700 to-green-400 opacity-50"></div>
-                <div className="z-50 w-full flex justify-between items-center text-white font-extrabold">
+              <button className="relative overflow-hidden btn btn-md border-none rounded-md bg-transparent hover:bg-white w-full">
+                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-emerald-900 to-green-500 opacity-50"></div>
+                <div className="z-50 w-full flex items-center justify-center text-white text-lg">
                   WhatsApp
-                  <AiOutlineWhatsApp size={30} />
+                  <AiOutlineWhatsApp size={30} className="ml-2" />
                 </div>
               </button>
             </a>
@@ -103,7 +107,7 @@ function Cart() {
         </div>
         <div className="relative flex flex-col overflow-y-scroll">
           <div className="relative w-full grow">
-            <div className="fixed bottom-0 w-full h-10 bg-gradient-to-t from-primary to-transparent z-50"></div>
+            <div className="fixed bottom-0 w-full h-10 bg-gradient-to-t from-primary to-transparent z-40"></div>
 
             <ul className="menu active text-white mb-6">
               {Object.entries(cartProducts).map(
