@@ -65,8 +65,6 @@ const fetchContentful = async () => {
       i
     ) => {
       const urls = image.map((img) => img.fields.file.url);
-      const count = 0;
-
       return {
         name,
         urls,
@@ -75,7 +73,6 @@ const fetchContentful = async () => {
         available,
         subcategoryName,
         categoryName,
-        count,
       };
     }
   );

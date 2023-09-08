@@ -1,6 +1,6 @@
 "use client";
 import { Products } from "@/types";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context";
 
 import { IoMdClose } from "react-icons/io";

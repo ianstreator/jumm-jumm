@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { ProductStructure } from "@/types";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context";
 
 function ProductCard(product: ProductStructure) {
@@ -22,7 +22,7 @@ function ProductCard(product: ProductStructure) {
     <div
       key={name}
       id={name}
-      className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 overflow-hidden md:mr-4"
+      className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 overflow-hidden sm:mr-4 md:mr-8"
     >
       <Image
         src={`https:${urls[0]}`}
