@@ -13,7 +13,7 @@ import Document from "./pages/_document";
 export const metadata: Metadata = {
   title: "JummJumm",
   description:
-    "Descubre un catálogo exclusivo de auténticos productos asiáticos, disponibles para envío dentro de Venezuela. Sumérgete en la rica variedad de culturas asiáticas y encuentra tesoros únicos de todo el continente. Nuestra tienda en línea ofrece una experiencia de compra fluida, completa con una potente función de creación de listas para seleccionar tus artículos favoritos. Encuentra los productos perfectos que reflejen tu gusto y estilo, ¡todo entregado directamente en tu puerta dentro de Venezuela!",
+    "Descubre un catálogo exclusivo de productos asiáticos con envíos en Venezuela. Explora la rica diversidad de culturas asiáticas y encuentra tesoros únicos. Compra en línea con facilidad y recíbelo en tu puerta.",
 };
 
 export default async function RootLayout({

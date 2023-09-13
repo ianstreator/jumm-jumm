@@ -27,7 +27,7 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-primary w-full grow-0 flex items-center justify-between p-2 px-6">
+    <nav className="bg-primary w-full grow-0 flex items-center justify-between p-2 px-6">
       <button
         className="btn btn-sm bg-secondary text-white border-none rounded-md"
         onClick={() => {
@@ -61,7 +61,7 @@ function Navbar() {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 }
 
