@@ -48,7 +48,7 @@ function Cart() {
             <div className="relative">
               <Image
                 onClick={() => setCartState(false)}
-                src={"/jumm-jumm-logo.svg"}
+                src={"/jumm-jumm-logo.png"}
                 width={50}
                 height={50}
                 alt="logo"

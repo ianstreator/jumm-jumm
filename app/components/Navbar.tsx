@@ -39,7 +39,7 @@ function Navbar() {
       </button>
       <div className="relative">
         <Image
-          src={"/jumm-jumm-logo.svg"}
+          src={"/jumm-jumm-logo.png"}
           width={60}
           height={60}
           alt="logo"
