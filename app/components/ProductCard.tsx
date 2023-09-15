@@ -26,8 +26,8 @@ function ProductCard(product: ProductStructure) {
     >
       <Image
         src={`https:${urls[0]}`}
-        width={175}
-        height={175}
+        width={150}
+        height={150}
         alt={name}
       ></Image>
 

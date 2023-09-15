@@ -52,8 +52,8 @@ body {
 .card-min {
   min-width: 350px;
   max-width: 350px;
-  min-height: 175px;
-  max-height: 175px;
+  min-height: 150px;
+  max-height: 150px;
 }
 .product-image-dimensions {
   width: 175px;
