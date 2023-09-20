@@ -6,7 +6,7 @@ const imprima = Imprima({
   subsets: ["latin"],
   weight: "400",
 });
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 import Document from "./pages/_document";
 
@@ -21,19 +21,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const theme = await getTheme();
+  // const theme = await getTheme();
 
   return (
-    <Document theme={theme || "Oscura"} imprima={imprima}>
+    <Document theme={"Oscura"} imprima={imprima}>
       {children}
       <Analytics />
     </Document>
   );
 }
 
-const getTheme = async () => {
-  const cookieStore = cookies();
-  const storedTheme = cookieStore.get("theme");
-  const theme = storedTheme?.value;
-  return theme;
-};
+// const getTheme = async () => {
+//   const cookieStore = cookies();
+//   const storedTheme = cookieStore.get("theme");
+//   const theme = storedTheme?.value;
+//   return theme;
+// };

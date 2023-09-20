@@ -5,26 +5,27 @@ import { useContext } from "react";
 import { AppContext } from "../context";
 
 function Navbar() {
-  const { setMenuState, setCartState, cartProducts } = useContext(AppContext);
-  const [cartCount, setCartCount] = useState(0);
+  const { setMenuState, setCartState, cartProducts, cartCount } = useContext(AppContext);
+  // const [cartCount, setCartCount] = useState(0);
+
+
+  // const cartProductsSum = () => {
+  //   let count = 0;
+
+  //   Object.values(cartProducts).forEach((category) => {
+  //     Object.values(category).forEach((subcategory) => {
+  //       Object.values(subcategory).forEach(
+  //         (product) => (count += product.count)
+  //       );
+  //     });
+  //   });
+
+  //   return count;
+  // };
 
   useEffect(() => {
-    setCartCount(cartProductsSum());
-  }, [cartProducts]);
-
-  const cartProductsSum = () => {
-    let count = 0;
-
-    Object.values(cartProducts).forEach((category) => {
-      Object.values(category).forEach((subcategory) => {
-        Object.values(subcategory).forEach(
-          (product) => (count += product.count)
-        );
-      });
-    });
-
-    return count;
-  };
+    // setCartCount(cartProductsSum());
+  }, [cartCount]);
 
   return (
     <nav className="bg-primary w-full grow-0 flex items-center justify-between p-2 px-6">
