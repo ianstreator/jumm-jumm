@@ -18,6 +18,25 @@ module.exports = {
   daisyui: {
     themes: [
       {
+        Oscura: {
+          primary: "#CBD5E1",
+
+          secondary: "#334155",
+
+          accent: "#94A3B8",
+
+          neutral: "#262626",
+
+          "base-100": "#423e56",
+
+          info: "#FED7AA",
+
+          success: "#57e5c4",
+
+          warning: "#efb343",
+
+          error: "#ee4f49",
+        },
         Rosa: {
           primary: "#FFE4E6",
 
@@ -43,25 +62,6 @@ module.exports = {
           secondary: "#93C5FD",
 
           accent: "#BFDBFE",
-
-          neutral: "#262626",
-
-          "base-100": "#423e56",
-
-          info: "#FED7AA",
-
-          success: "#57e5c4",
-
-          warning: "#efb343",
-
-          error: "#ee4f49",
-        },
-        Oscura: {
-          primary: "#CBD5E1",
-
-          secondary: "#334155",
-          
-          accent: "#94A3B8",
 
           neutral: "#262626",
 
