@@ -38,7 +38,7 @@ function CartProduct(product: CartProduct) {
           onClick={() => setImage(!image)}
           className="flex flex-row py-2 items-center justify-center text-neutral"
         >
-          <p className="w-40 h-10 pl-2 whitespace-normal text-start font-bold flex items-center justify-start cursor-pointer">
+          <p className="w-36 h-10 pl-2 whitespace-normal text-start font-bold flex items-center justify-start cursor-pointer">
             {name}
           </p>
           <p className="w-8 text-xl mx-2">{`x${count}`}</p>

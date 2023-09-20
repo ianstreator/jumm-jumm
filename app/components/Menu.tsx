@@ -12,50 +12,53 @@ function Menu(products: Products) {
 
   return (
     <div
-      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${menuState ? "left-0" : "-left-full"
+      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${menuState ? "left-0" : "-left-full"
         } `}
     >
-      <IoMdClose
-        onClick={() => setMenuState(false)}
-        color="white"
-        size={40}
-        className="absolute top-0 right-0 m-2 cursor-pointer"
-      />
-      <ul className="menu text-white">
+      <div className="flex w-full justify-between p-4 shadow-md">
+        <h2 className="text-white font-bold text-2xl">MENÚ</h2>
+
+        <IoMdClose
+          onClick={() => setMenuState(false)}
+          color="white"
+          size={30}
+          className="cursor-pointer"
+        />
+      </div>
+
+      <ul className="menu grow overflow-y-scroll flex flex-col flex-nowrap pr-4">
         {Object.entries(products).map(([category, subcategories], i) => {
           return (
-            <li key={i} className="w-1/2">
-              <a
-                href={`#${Object.values(subcategories)[0][0].name}`}
-                onClick={() => setMenuState(false)}
-                className="font-bold text-xl active"
-              >
-                {category}
-              </a>
-              <ul>
-                {Object.entries(subcategories).map(
-                  ([subcategory, products], i) => {
-                    return (
-                      <li key={i}>
-                        <a
-                          href={`#${products[0].name}`}
-                          onClick={() => setMenuState(false)}
-                          className="font-bold active"
-                        >
-                          {subcategory}
-                        </a>
-                      </li>
-                    );
-                  }
-                )}
-              </ul>
+            <li key={i} className="w-full">
+              <details>
+                <summary className="font-bold text-xl">{category}</summary>
+                <ul>
+                  {Object.entries(subcategories).map(
+                    ([subcategory, products], i) => {
+                      return (
+                        <li key={i} className="bg-black/5 my-1 rounded-md">
+                          <a
+                            href={`#${products[0].name}`}
+                            onClick={() => setMenuState(false)}
+                            className="font-bold active text-md"
+                          >
+                            {subcategory}
+                          </a>
+                        </li>
+                      );
+                    }
+                  )}
+                </ul>
+
+              </details>
+
             </li>
           );
         })}
       </ul>
-      <div className="menu font-bold text-white border border-b-transparent border-x-transparent border-t-gray-50 mt-4">
-        <h1 className="text-xl p-2">Tema</h1>
-        <ul className="flex flex-row">
+      <div className="menu flex flex-row flex-nowrap items-center bg-accent/50 py-4 font-bold text-white">
+        <h1 className="text-xl px-2">Tema:</h1>
+        <ul className="flex flex-row w-full justify-between items-center">
           {themes.map((themeName, i) => (
             <li
               key={i}

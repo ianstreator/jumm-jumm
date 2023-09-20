@@ -32,7 +32,7 @@ function ProductCard(product: ProductStructure) {
       ></Image>
 
       <div className="card-body p-2 justify-between">
-        <div>
+        <div className="text-sm">
           <p className="font-bold">{name.replace("(", "").replace(")", "")}</p>
           <p>${price.toFixed(2)}</p>
         </div>
