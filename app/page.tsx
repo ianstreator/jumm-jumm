@@ -1,8 +1,6 @@
-const contentful = require("contentful");
 import { cache } from "react"
 import {
   ProductStructure,
-  ContentfulProductStructure,
   Products,
 } from "@/types";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +15,7 @@ export const revalidate = 3600
 
 export default async function Home() {
   const { products } = await fetchContentful();
+
 
   return (
     <main className="relative h-full flex flex-col items-center justify-between backdrop bg-accent md:px-40">
@@ -42,119 +41,65 @@ const fetchContentful = cache(async () => {
   const SPACE_ID = process.env.SPACE_ID
   const ENVIRONMENT_ID = process.env.ENVIRONMENT_ID
 
-  const client = contentful.createClient({
-    accessToken: ACCESS_TOKEN,
-    space: SPACE_ID,
-  });
+  const BASE_URL = "https://cdn.contentful.com"
 
+  const res = await fetch(`${BASE_URL}/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries?content_type=products&include=2&limit=200&access_token=${ACCESS_TOKEN}`)
 
-  const content: ContentfulProductStructure = await client.getEntries({
-    limit: 200,
-    content_type: "products",
-    include: "2",
-  });
+  const products: Products = await res.json().then(
+    data => {
+      const { includes: { Entry, Asset }, items } = data
 
+      const imagesMap: any = Object.values(Asset).reduce((map: any, ass: any) => {
+        map[ass.sys.id] = ass.fields.file.url;
+        return map;
+      }, {});
 
+      const categories: any = {}
+      const subcategories: any = {}
 
+      for (const entry of Entry) {
+        const isCategory = !entry.fields.category
+        const id = entry.sys.id
+        const title = entry.fields.title
 
-  // const BASE_URL = "https://cdn.contentful.com"
+        if (isCategory) {
+          categories[id] = title
+        } else {
+          const categoryPointer = entry.fields.category.sys.id
+          subcategories[id] = { subcategoryName: title, categoryPointer }
+        }
+      }
 
-  // const res = await fetch(`${BASE_URL}/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries?content_type=products&include=2&limit=200&access_token=${ACCESS_TOKEN}`)
+      const products = Object.values(items).reduce((products: Products, item: any) => {
+        const imageID = item.fields.image[0].sys.id
+        const subcategoryID = item.fields.subcategory.sys.id
+        const { subcategoryName, categoryPointer } = subcategories[subcategoryID]
+        const categoryName = categories[categoryPointer]
+        const url = imagesMap[imageID]
 
-  // // console.log(res)
+        delete item.fields.image
+        delete item.fields.subcategory
 
-  // const content: ProductStructure[] = await res.json().then(
-  //   data => {
-  //     const { includes: { Entry, Asset }, items } = data
+        const product: ProductStructure = {
+          ...item.fields,
+          url,
+          subcategoryName,
+          categoryName
+        }
 
-  //     const categories: any = {}
+        products[categoryName] = products[categoryName] || {};
+        products[categoryName][subcategoryName] = products[categoryName][subcategoryName] || [];
+        products[categoryName][subcategoryName].push(product);
 
-  //     const subcategories: any = {}
+        return products
+      }, {})
 
-  //     for (const [i, entry] of Entry.entries()) {
-  //       console.log(entry, i)
-
-  //       const isCategory = !entry.fields.category
-  //       const id = entry.sys.id
-  //       const title = entry.fields.title
-
-
-  //       if (isCategory) {
-
-  //         categories[title] = {id}
-  //       } else {
-  //         subcategories[title] = {id}
-
-  //       }
-  //     }
-
-  //     console.log(categories,subcategories)
-
-  //     return data
-  //   }
-  // )
-
-
-  const items: ProductStructure[] = content.items.map(
-    (
-      {
-        fields: {
-          name,
-          available,
-          description,
-          price,
-          image,
-          subcategory: {
-            fields: {
-              title: subcategoryName,
-              category: {
-                fields: { title: categoryName },
-              },
-            },
-          },
-        },
-      },
-      i
-    ) => {
-      const urls = image.map((img) => img.fields.file.url);
-      return {
-        name,
-        urls,
-        price,
-        description,
-        available,
-        subcategoryName,
-        categoryName,
-      };
+      return products
     }
-  );
+  )
 
-  const products: Products = {};
-
-  items.forEach((item) => {
-    const { categoryName, subcategoryName } = item;
-    const product = { ...item };
-
-    if (!products[categoryName!])
-      products[categoryName!] = {};
-
-    if (!products[categoryName!][subcategoryName!]) {
-      products[categoryName!][subcategoryName!] = [product];
-    } else {
-      products[categoryName!][subcategoryName!].push(product);
-    }
-  });
-
-  // const products = items.reduce((acc, item) => {
-  //   const { categoryName, subcategoryName, ...product } = item;
-
-  //   acc[categoryName!] = acc[categoryName!] || {};
-  //   acc[categoryName!][subcategoryName!] = acc[categoryName!][subcategoryName!] || [];
-  //   acc[categoryName!][subcategoryName!].push(product);
-
-  //   return acc;
-  // }, {});
 
   return { products };
+
 });
 
