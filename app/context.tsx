@@ -1,6 +1,5 @@
-import { CartProduct, CartProducts, ProductStructure } from "@/types";
+import { CartProducts, ProductStructure } from "@/types";
 import { createContext, useState, useEffect } from "react";
-// import { setCookie, getCookie } from "cookies-next";
 
 type ContextProps = {
   children: React.ReactNode;
@@ -32,22 +31,8 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    // if (theme !== "") {
-    //   setCookie("theme", theme);
-    //   document.querySelector("html")?.setAttribute("data-theme", theme);
-    // }
     document.querySelector("html")?.setAttribute("data-theme", theme);
-
   }, [theme]);
-
-  // useEffect(() => {
-  //   const savedTheme = getCookie("theme");
-  //   if (savedTheme) {
-  //     setTheme(savedTheme);
-  //   } else {
-  //     setTheme("Oscura");
-  //   }
-  // }, []);
 
   const addProductToCart = (product: ProductStructure) => {
     const { name, price, categoryName, subcategoryName } = product;
@@ -58,7 +43,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     setCartCount((count) => count += 1)
     if (cartProduct) return increaseProductCartCount(cartProduct);
 
-    const newCartProduct: CartProduct = { ...product, count: 1 };
+    const newCartProduct: ProductStructure = { ...product, count: 1 };
 
     
     setCartProducts((curr) => {
@@ -75,7 +60,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const increaseProductCartCount = (product: CartProduct) => {
+  const increaseProductCartCount = (product: ProductStructure) => {
     const { name, count, categoryName, subcategoryName } = product;
 
     setCartProducts((curr) => {
@@ -85,14 +70,14 @@ export const AppContextProvider = ({ children }: ContextProps) => {
           ...curr?.[categoryName],
           [subcategoryName]: {
             ...curr?.[categoryName]?.[subcategoryName],
-            [name]: { ...product, count: count + 1 },
+            [name]: { ...product, count: count! + 1 },
           },
         },
       };
     });
   };
 
-  const decreaseProductCartCount = (product: CartProduct) => {
+  const decreaseProductCartCount = (product: ProductStructure) => {
     const { name, count, price, categoryName, subcategoryName } = product;
     setCartTotal((total) => total - price);
     setCartCount((count) => count -= 1)
@@ -102,7 +87,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
       checkProductCountAndHierarchy(product);
 
     setCartProducts((curr) => {
-      if (productCount < 2) {
+      if (productCount! < 2) {
         delete curr[categoryName][subcategoryName][name];
         if (subcategoryLength < 2) {
           delete curr[categoryName][subcategoryName];
@@ -120,7 +105,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
           ...curr?.[categoryName],
           [subcategoryName]: {
             ...curr?.[categoryName]?.[subcategoryName],
-            [name]: { ...product, count: count - 1 },
+            [name]: { ...product, count: count! - 1 },
           },
         },
       };
@@ -131,7 +116,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     categoryName,
     subcategoryName,
     name,
-  }: CartProduct) => {
+  }: ProductStructure) => {
     const productCount =
       cartProducts[categoryName][subcategoryName][name].count;
     const subcategoryLength = Object.keys(

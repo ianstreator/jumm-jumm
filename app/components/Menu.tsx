@@ -17,7 +17,6 @@ function Menu(products: Products) {
     >
       <div className="flex w-full justify-between p-4 shadow-md">
         <h2 className="text-white font-bold text-2xl">MENÚ</h2>
-
         <IoMdClose
           onClick={() => setMenuState(false)}
           color="white"
@@ -25,7 +24,6 @@ function Menu(products: Products) {
           className="cursor-pointer"
         />
       </div>
-
       <ul className="menu grow overflow-y-scroll flex flex-col flex-nowrap pr-4">
         {Object.entries(products).map(([category, subcategories], i) => {
           return (
@@ -49,9 +47,7 @@ function Menu(products: Products) {
                     }
                   )}
                 </ul>
-
               </details>
-
             </li>
           );
         })}

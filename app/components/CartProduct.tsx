@@ -1,12 +1,12 @@
-import { CartProduct } from "@/types";
+import { ProductStructure } from "@/types";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
 import { AiOutlinePlus, AiOutlineMinus, AiOutlineDelete } from "react-icons/ai";
 
 import { AppContext } from "../context";
 
-function CartProduct(product: CartProduct) {
-  const { name, urls, count } = product;
+function CartProduct(product: ProductStructure) {
+  const { name, url, count } = product;
 
   const [image, setImage] = useState(false);
 
@@ -18,7 +18,7 @@ function CartProduct(product: CartProduct) {
       <div className="relative w-fit my-2 p-0 bg-transparent overflow-hidden hover:bg-transparent shadow-md active">
         <button
           onClick={() => {
-            if (count < 2) {
+            if (count! < 2) {
               return (
                 confirm("¿Quitar artículo del carrito?") &&
                 decreaseProductCartCount(product)
@@ -28,7 +28,7 @@ function CartProduct(product: CartProduct) {
           }}
           className="btn btn-lg rounded-r-none w-10 text-white  border-none p-1 transform-none bg-secondary"
         >
-          {count < 2 ? (
+          {count! < 2 ? (
             <AiOutlineDelete size={20} />
           ) : (
             <AiOutlineMinus size={20} />
@@ -54,7 +54,7 @@ function CartProduct(product: CartProduct) {
 
       {image && (
         <Image
-          src={`https:${urls[0]}`}
+          src={`https:${url}`}
           width={175}
           height={175}
           alt={name}

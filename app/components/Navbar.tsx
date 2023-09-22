@@ -1,30 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { AppContext } from "../context";
 
 function Navbar() {
   const { setMenuState, setCartState, cartProducts, cartCount } = useContext(AppContext);
-  // const [cartCount, setCartCount] = useState(0);
-
-
-  // const cartProductsSum = () => {
-  //   let count = 0;
-
-  //   Object.values(cartProducts).forEach((category) => {
-  //     Object.values(category).forEach((subcategory) => {
-  //       Object.values(subcategory).forEach(
-  //         (product) => (count += product.count)
-  //       );
-  //     });
-  //   });
-
-  //   return count;
-  // };
-
+ 
   useEffect(() => {
-    // setCartCount(cartProductsSum());
   }, [cartCount]);
 
   return (

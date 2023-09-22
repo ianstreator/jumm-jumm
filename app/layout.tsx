@@ -6,7 +6,6 @@ const imprima = Imprima({
   subsets: ["latin"],
   weight: "400",
 });
-// import { cookies } from "next/headers";
 
 import Document from "./pages/_document";
 
@@ -21,7 +20,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const theme = await getTheme();
 
   return (
     <Document theme={"Oscura"} imprima={imprima}>
@@ -30,10 +28,3 @@ export default async function RootLayout({
     </Document>
   );
 }
-
-// const getTheme = async () => {
-//   const cookieStore = cookies();
-//   const storedTheme = cookieStore.get("theme");
-//   const theme = storedTheme?.value;
-//   return theme;
-// };

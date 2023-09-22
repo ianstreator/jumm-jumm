@@ -4,16 +4,18 @@ import { ProductStructure } from "@/types";
 import { useContext } from "react";
 import { AppContext } from "../context";
 
-function ProductCard(product: ProductStructure) {
-  const { urls, name, price, available, categoryName, subcategoryName } =
+function ProductCard({ product, priority }: { product: ProductStructure, priority: boolean }) {
+
+  const { url, name, price, available, categoryName, subcategoryName } =
     product;
+
 
   const { addProductToCart } = useContext(AppContext);
 
   const cartProduct = {
     name,
     price,
-    urls,
+    url,
     categoryName,
     subcategoryName,
   };
@@ -25,13 +27,13 @@ function ProductCard(product: ProductStructure) {
       className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 overflow-hidden sm:mr-4 md:mr-8"
     >
       <Image
-        src={`https:${urls[0]}`}
+        priority={priority}
+        src={`https:${url}`}
         width={150}
         height={150}
         alt={name}
       ></Image>
-
-      <div className="card-body p-2 justify-between">
+      <div className="card-body p-2 justify-between text-sm">
         <div className="text-sm">
           <p className="font-bold">{name.replace("(", "").replace(")", "")}</p>
           <p>${price.toFixed(2)}</p>
