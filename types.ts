@@ -1,9 +1,9 @@
 export type ProductStructure = {
   name: string;
   available: boolean;
-  description?: string;
+  count?: number;
   price: number;
-  urls: string[];
+  url: string;
   categoryName: string;
   subcategoryName: string;
 };
@@ -14,32 +14,8 @@ export type Products = {
   };
 };
 
-export type CartProduct = {
-  name: string;
-  price: number;
-  count: number;
-  urls: string[];
-  categoryName: string;
-  subcategoryName: string;
-};
-
 export type CartProducts = {
   [categoryName: string]: {
-    [subcategoryName: string]: { [name: string]: CartProduct };
+    [subcategoryName: string]: { [name: string]: ProductStructure };
   };
-};
-
-export type ContentfulProductStructure = {
-  items: {
-    fields: {
-      name: string;
-      available: boolean;
-      image: { fields: { file: { url: string } } }[];
-      price: number;
-      description: string;
-      subcategory: {
-        fields: { title: string; category: { fields: { title: string } } };
-      };
-    };
-  }[];
 };
