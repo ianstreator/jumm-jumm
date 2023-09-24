@@ -12,8 +12,9 @@ function Menu(products: Products) {
 
   return (
     <div
-      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${menuState ? "left-0" : "-left-full"
-        } `}
+      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${
+        menuState ? "left-0" : "-left-full"
+      } `}
     >
       <div className="flex w-full justify-between p-4 shadow-md">
         <h2 className="text-white font-bold text-2xl">MENÚ</h2>
@@ -52,21 +53,18 @@ function Menu(products: Products) {
           );
         })}
       </ul>
-      <div className="menu flex flex-row flex-nowrap items-center bg-accent/50 py-4 font-bold text-white">
+      <div className="menu flex flex-row flex-nowrap items-center bg-neutral/10 py-4 font-bold text-white">
         <h1 className="text-xl px-2">Tema:</h1>
         <ul className="flex flex-row w-full justify-between items-center">
           {themes.map((themeName, i) => (
             <li
               key={i}
-              className={`${theme === themeName &&
-                "bg-green-300 text-neutral rounded-md"
-                }`}
+              className={`${
+                theme === themeName && "bg-green-300 text-neutral rounded-md"
+              }`}
               onClick={() => setTheme(themeName)}
             >
-              <p>
-                {themeName}
-
-              </p>
+              <p>{themeName}</p>
             </li>
           ))}
         </ul>

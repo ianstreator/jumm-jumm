@@ -38,11 +38,11 @@ module.exports = {
           error: "#ee4f49",
         },
         Rosa: {
-          primary: "#FFE4E6",
+          primary: "#FECDD3",
 
-          secondary: "#FDA4AF",
+          secondary: "#E64D67",
 
-          accent: "#FECDD3",
+          accent: "#FDA4AF",
 
           neutral: "#262626",
 
@@ -50,7 +50,7 @@ module.exports = {
 
           info: "#FED7AA",
 
-          success: "#57e5c4",
+          success: "#a9d1fe",
 
           warning: "#efb343",
 
@@ -59,7 +59,7 @@ module.exports = {
         Azul: {
           primary: "#DBEAFE",
 
-          secondary: "#93C5FD",
+          secondary: "#4C86E5",
 
           accent: "#BFDBFE",
 
