@@ -1,4 +1,3 @@
-import { cache } from "react"
 import {
   ProductStructure,
   Products,
@@ -35,7 +34,7 @@ export default async function Home() {
 }
 export const dynamic = 'force-static'
 
-const fetchContentful = cache(async () => {
+const fetchContentful = async () => {
 
   const ACCESS_TOKEN = process.env.ACCESS_TOKEN
   const SPACE_ID = process.env.SPACE_ID
@@ -46,27 +45,25 @@ const fetchContentful = cache(async () => {
   const res = await fetch(`${BASE_URL}/spaces/${SPACE_ID}/environments/${ENVIRONMENT_ID}/entries?content_type=products&include=2&limit=200&access_token=${ACCESS_TOKEN}`)
 
   const products: Products = await res.json().then(
-    data => {
-      const { includes: { Entry, Asset }, items } = data
+    ({ includes: { Entry, Asset }, items }) => {
 
-      const imagesMap: any = Object.values(Asset).reduce((map: any, ass: any) => {
-        map[ass.sys.id] = ass.fields.file.url;
+      const imagesMap: any = Object.values(Asset).reduce((map: any, asset: any) => {
+        map[asset.sys.id] = asset.fields.file.url;
         return map;
       }, {});
 
-      const categories: any = {}
-      const subcategories: any = {}
+      const categories: { [id: string]: string } = {}
+      const subcategories: { [id: string]: { subcategoryName: string, categoryPointer: string } } = {}
 
       for (const entry of Entry) {
-        const isCategory = !entry.fields.category
+        const isSubcategory = entry.fields.category
         const id = entry.sys.id
         const title = entry.fields.title
 
-        if (isCategory) {
-          categories[id] = title
+        if (isSubcategory) {
+          subcategories[id] = { subcategoryName: title, categoryPointer: entry.fields.category.sys.id }
         } else {
-          const categoryPointer = entry.fields.category.sys.id
-          subcategories[id] = { subcategoryName: title, categoryPointer }
+          categories[id] = title
         }
       }
 
@@ -101,5 +98,5 @@ const fetchContentful = cache(async () => {
 
   return { products };
 
-});
+};
 
