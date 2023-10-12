@@ -17,7 +17,7 @@ type Context = {
   increaseProductCartCount: Function;
   decreaseProductCartCount: Function;
   cartTotal: number;
-  cartCount: number
+  cartCount: number;
 };
 
 export const AppContext = createContext({} as Context);
@@ -39,13 +39,12 @@ export const AppContextProvider = ({ children }: ContextProps) => {
 
     const cartProduct = cartProducts?.[categoryName]?.[subcategoryName]?.[name];
 
-    setCartTotal((total) => total + price);
-    setCartCount((count) => count += 1)
     if (cartProduct) return increaseProductCartCount(cartProduct);
 
+    setCartTotal((total) => total + price);
+    setCartCount((count) => (count += 1));
     const newCartProduct: ProductStructure = { ...product, count: 1 };
 
-    
     setCartProducts((curr) => {
       return {
         ...curr,
@@ -61,8 +60,10 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   };
 
   const increaseProductCartCount = (product: ProductStructure) => {
-    const { name, count, categoryName, subcategoryName } = product;
+    const { name, count, price, categoryName, subcategoryName } = product;
 
+    setCartTotal((total) => total + price);
+    setCartCount((count) => (count += 1));
     setCartProducts((curr) => {
       return {
         ...curr,
@@ -79,9 +80,8 @@ export const AppContextProvider = ({ children }: ContextProps) => {
 
   const decreaseProductCartCount = (product: ProductStructure) => {
     const { name, count, price, categoryName, subcategoryName } = product;
-    setCartTotal((total) => total - price);
-    setCartCount((count) => count -= 1)
-
+    setCartTotal((total) => (total -= price));
+    setCartCount((count) => (count -= 1));
 
     const { productCount, subcategoryLength, categoryLength } =
       checkProductCountAndHierarchy(product);
