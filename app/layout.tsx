@@ -22,7 +22,7 @@ export default async function RootLayout({
 }) {
 
   return (
-    <Document theme={"Oscura"} imprima={imprima}>
+    <Document theme={"Rosa"} imprima={imprima}>
       {children}
       <Analytics />
     </Document>
