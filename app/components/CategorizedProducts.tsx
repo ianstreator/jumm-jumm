@@ -21,7 +21,7 @@ function CategorizedProducts(products: Products) {
                   <h3 className="sticky top-0 z-30 font-med text-2xl p-2 px-4 bg-info w-fit">
                     {subcategory}
                   </h3>
-                  <div className="relative w-full flex flex-wrap p-6 justify-center md:justify-start">
+                  <div className="relative w-full flex flex-wrap py-6 justify-center md:justify-start">
                     {products.map((product, productIndex) => (
                       <ProductCard
                         key={productIndex}

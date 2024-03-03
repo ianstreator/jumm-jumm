@@ -24,15 +24,17 @@ function ProductCard({ product, priority }: { product: ProductStructure, priorit
     <div
       key={name}
       id={name}
-      className="card card-side rounded-sm w-44 card-min bg-primary shadow-lg my-4 overflow-hidden sm:mr-4 md:mr-8"
+      className="card rounded-sm bg-primary shadow-lg my-6 mx-1 sm:mr-4 md:mr-8"
     >
       <Image
         priority={priority}
         src={`https:${url}`}
-        width={150}
-        height={150}
+        width={200}
+        height={200}
         alt={name}
+        className="!w-[200px] !h-[230px]"
       ></Image>
+
       <div className="card-body p-2 justify-between text-sm">
         <div className="text-sm">
           <p className="font-bold">{name.replace("(", "").replace(")", "")}</p>
