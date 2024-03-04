@@ -1,4 +1,5 @@
 import { ProductStructure, Products } from "@/types";
+import contentful from "contentful"
 import "react-toastify/dist/ReactToastify.css";
 
 import CategorizedProducts from "./components/CategorizedProducts";
@@ -29,6 +30,11 @@ export default async function Home() {
   );
 }
 export const dynamic = "force-static";
+
+const client = contentful.createClient({
+  space: process.env.SPACE_ID,
+  accessToken: process.env.ACCESS_TOKEN
+})
 
 const fetchContentful = async () => {
   const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
@@ -88,11 +94,16 @@ const fetchContentful = async () => {
             subcategoryName,
             categoryName,
           };
-
           products[categoryName] = products[categoryName] || {};
           products[categoryName][subcategoryName] =
             products[categoryName][subcategoryName] || [];
-          products[categoryName][subcategoryName].push(product);
+          if (item.fields.available) {
+            products[categoryName][subcategoryName].unshift(product);
+
+          } else {
+            products[categoryName][subcategoryName].push(product);
+
+          }
 
           return products;
         },
