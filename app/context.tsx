@@ -1,5 +1,5 @@
-import { CartProducts, ProductStructure } from "@/types";
 import { createContext, useState, useEffect } from "react";
+import { CategorizedCartProducts, Product } from "@/types";
 
 type ContextProps = {
   children: React.ReactNode;
@@ -11,8 +11,8 @@ type Context = {
   setMenuState: React.Dispatch<React.SetStateAction<boolean>>;
   cartState: boolean;
   setCartState: React.Dispatch<React.SetStateAction<boolean>>;
-  cartProducts: CartProducts;
-  setCartProducts: React.Dispatch<React.SetStateAction<CartProducts>>;
+  cartProducts: CategorizedCartProducts;
+  setCartProducts: React.Dispatch<React.SetStateAction<CategorizedCartProducts>>;
   addProductToCart: Function;
   increaseProductCartCount: Function;
   decreaseProductCartCount: Function;
@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   const [theme, setTheme] = useState("Rosa");
   const [menuState, setMenuState] = useState(false);
   const [cartState, setCartState] = useState(false);
-  const [cartProducts, setCartProducts] = useState<CartProducts>({});
+  const [cartProducts, setCartProducts] = useState<CategorizedCartProducts>({});
   const [cartTotal, setCartTotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
@@ -34,24 +34,24 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const addProductToCart = (product: ProductStructure) => {
-    const { name, price, categoryName, subcategoryName } = product;
+  const addProductToCart = (product: Product) => {
+    const { name, price, category, subcategory } = product;
 
-    const cartProduct = cartProducts?.[categoryName]?.[subcategoryName]?.[name];
+    const cartProduct = cartProducts?.[category]?.[subcategory]?.[name];
 
     if (cartProduct) return increaseProductCartCount(cartProduct);
 
     setCartTotal((total) => total + price);
     setCartCount((count) => (count += 1));
-    const newCartProduct: ProductStructure = { ...product, count: 1 };
+    const newCartProduct: Product = { ...product, count: 1 };
 
     setCartProducts((curr) => {
       return {
         ...curr,
-        [categoryName]: {
-          ...curr?.[categoryName],
-          [subcategoryName]: {
-            ...curr?.[categoryName]?.[subcategoryName],
+        [category]: {
+          ...curr?.[category],
+          [subcategory]: {
+            ...curr?.[category]?.[subcategory],
             [name]: newCartProduct,
           },
         },
@@ -59,18 +59,18 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const increaseProductCartCount = (product: ProductStructure) => {
-    const { name, count, price, categoryName, subcategoryName } = product;
+  const increaseProductCartCount = (product: Product) => {
+    const { name, count, price, category, subcategory } = product;
 
     setCartTotal((total) => total + price);
     setCartCount((count) => (count += 1));
     setCartProducts((curr) => {
       return {
         ...curr,
-        [categoryName]: {
-          ...curr?.[categoryName],
-          [subcategoryName]: {
-            ...curr?.[categoryName]?.[subcategoryName],
+        [category]: {
+          ...curr?.[category],
+          [subcategory]: {
+            ...curr?.[category]?.[subcategory],
             [name]: { ...product, count: count! + 1 },
           },
         },
@@ -78,8 +78,8 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const decreaseProductCartCount = (product: ProductStructure) => {
-    const { name, count, price, categoryName, subcategoryName } = product;
+  const decreaseProductCartCount = (product: Product) => {
+    const { name, count, price, category, subcategory } = product;
     setCartTotal((total) => (total -= price));
     setCartCount((count) => (count -= 1));
 
@@ -88,11 +88,11 @@ export const AppContextProvider = ({ children }: ContextProps) => {
 
     setCartProducts((curr) => {
       if (productCount! < 2) {
-        delete curr[categoryName][subcategoryName][name];
+        delete curr[category][subcategory][name];
         if (subcategoryLength < 2) {
-          delete curr[categoryName][subcategoryName];
+          delete curr[category][subcategory];
           if (categoryLength < 2) {
-            delete curr[categoryName];
+            delete curr[category];
           }
         }
         return {
@@ -101,10 +101,10 @@ export const AppContextProvider = ({ children }: ContextProps) => {
       }
       return {
         ...curr,
-        [categoryName]: {
-          ...curr?.[categoryName],
-          [subcategoryName]: {
-            ...curr?.[categoryName]?.[subcategoryName],
+        [category]: {
+          ...curr?.[category],
+          [subcategory]: {
+            ...curr?.[category]?.[subcategory],
             [name]: { ...product, count: count! - 1 },
           },
         },
@@ -113,16 +113,16 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   };
 
   const checkProductCountAndHierarchy = ({
-    categoryName,
-    subcategoryName,
+    category,
+    subcategory,
     name,
-  }: ProductStructure) => {
+  }: Product) => {
     const productCount =
-      cartProducts[categoryName][subcategoryName][name].count;
+      cartProducts[category][subcategory][name].count;
     const subcategoryLength = Object.keys(
-      cartProducts[categoryName][subcategoryName]
+      cartProducts[category][subcategory]
     ).length;
-    const categoryLength = Object.keys(cartProducts[categoryName]).length;
+    const categoryLength = Object.keys(cartProducts[category]).length;
 
     return { productCount, subcategoryLength, categoryLength };
   };
