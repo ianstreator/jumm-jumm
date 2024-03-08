@@ -1,21 +1,21 @@
-export type ProductStructure = {
+export type Product = {
   name: string;
-  available: boolean;
-  count?: number;
   price: number;
-  url: string;
-  categoryName: string;
-  subcategoryName: string;
+  available: boolean;
+  imageURL: string;
+  category: string;
+  subcategory: string;
+  count?: number;
 };
 
-export type Products = {
-  [category: string]: {
-    [subcategory: string]: ProductStructure[];
+export type CategorizedProducts = {
+  [categoryTitle: string]: {
+    [subcategoryTitle: string]: Product[];
   };
 };
 
-export type CartProducts = {
-  [categoryName: string]: {
-    [subcategoryName: string]: { [name: string]: ProductStructure };
+export type CategorizedCartProducts = {
+  [categoryTitle: string]: {
+    [subcategoryTitle: string]: { [name: string]: Product };
   };
 };
