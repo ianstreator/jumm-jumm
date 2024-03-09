@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductType = {
   name: string;
   price: number;
   available: boolean;
@@ -8,14 +8,14 @@ export type Product = {
   count?: number;
 };
 
-export type CategorizedProducts = {
+export type CategorizedProductsType = {
   [categoryTitle: string]: {
-    [subcategoryTitle: string]: Product[];
+    [subcategoryTitle: string]: ProductType[];
   };
 };
 
-export type CategorizedCartProducts = {
+export type CategorizedCartProductsType = {
   [categoryTitle: string]: {
-    [subcategoryTitle: string]: { [name: string]: Product };
+    [subcategoryTitle: string]: { [name: string]: ProductType };
   };
 };
