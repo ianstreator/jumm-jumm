@@ -1,11 +1,11 @@
 "use client";
-import { Products } from "@/types";
+import { CategorizedProductsType } from "@/types";
 import { useContext } from "react";
 import { AppContext } from "../context";
 
 import { IoMdClose } from "react-icons/io";
 
-function Menu(products: Products) {
+function Menu(products: CategorizedProductsType) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
   const themes = ["Oscura", "Rosa", "Azul"];
@@ -37,7 +37,7 @@ function Menu(products: Products) {
                       return (
                         <li key={i} className="bg-black/5 my-1 rounded-md">
                           <a
-                            href={`#${products[0].name}`}
+                            href={`#${products[0].name.trim()}`}
                             onClick={() => setMenuState(false)}
                             className="font-bold active text-md"
                           >

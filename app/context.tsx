@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { CategorizedCartProducts, Product } from "@/types";
+import { CategorizedCartProductsType, ProductType } from "@/types";
 
 type ContextProps = {
   children: React.ReactNode;
@@ -11,8 +11,8 @@ type Context = {
   setMenuState: React.Dispatch<React.SetStateAction<boolean>>;
   cartState: boolean;
   setCartState: React.Dispatch<React.SetStateAction<boolean>>;
-  cartProducts: CategorizedCartProducts;
-  setCartProducts: React.Dispatch<React.SetStateAction<CategorizedCartProducts>>;
+  cartProducts: CategorizedCartProductsType;
+  setCartProducts: React.Dispatch<React.SetStateAction<CategorizedCartProductsType>>;
   addProductToCart: Function;
   increaseProductCartCount: Function;
   decreaseProductCartCount: Function;
@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
   const [theme, setTheme] = useState("Rosa");
   const [menuState, setMenuState] = useState(false);
   const [cartState, setCartState] = useState(false);
-  const [cartProducts, setCartProducts] = useState<CategorizedCartProducts>({});
+  const [cartProducts, setCartProducts] = useState<CategorizedCartProductsType>({});
   const [cartTotal, setCartTotal] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
@@ -34,7 +34,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const addProductToCart = (product: Product) => {
+  const addProductToCart = (product: ProductType) => {
     const { name, price, category, subcategory } = product;
 
     const cartProduct = cartProducts?.[category]?.[subcategory]?.[name];
@@ -43,7 +43,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
 
     setCartTotal((total) => total + price);
     setCartCount((count) => (count += 1));
-    const newCartProduct: Product = { ...product, count: 1 };
+    const newCartProduct: ProductType = { ...product, count: 1 };
 
     setCartProducts((curr) => {
       return {
@@ -59,7 +59,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const increaseProductCartCount = (product: Product) => {
+  const increaseProductCartCount = (product: ProductType) => {
     const { name, count, price, category, subcategory } = product;
 
     setCartTotal((total) => total + price);
@@ -78,7 +78,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const decreaseProductCartCount = (product: Product) => {
+  const decreaseProductCartCount = (product: ProductType) => {
     const { name, count, price, category, subcategory } = product;
     setCartTotal((total) => (total -= price));
     setCartCount((count) => (count -= 1));
@@ -116,7 +116,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     category,
     subcategory,
     name,
-  }: Product) => {
+  }: ProductType) => {
     const productCount =
       cartProducts[category][subcategory][name].count;
     const subcategoryLength = Object.keys(

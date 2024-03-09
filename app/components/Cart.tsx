@@ -38,8 +38,9 @@ function Cart() {
 
   return (
     <div
-      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${cartState ? "right-0" : "-right-full"
-        } `}
+      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${
+        cartState ? "right-0" : "-right-full"
+      } `}
     >
       <div className="relative flex flex-col overflow-y-scroll w-full h-full">
         <div className="sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary shadow-md">
@@ -93,7 +94,9 @@ function Cart() {
               //     cartList
               //   )}`, "_blank")
               // }}
-              onClick={(e) => !window.confirm("¿Abrir WhatsApp?") && e.preventDefault()}
+              onClick={(e) =>
+                !window.confirm("¿Abrir WhatsApp?") && e.preventDefault()
+              }
               href={`https://api.whatsapp.com/send?phone=584125868522&text=${encodeURIComponent(
                 cartList
               )}`}
@@ -118,8 +121,6 @@ function Cart() {
               {Object.entries(cartProducts).map(
                 ([category, subcategories], i) => (
                   <li key={i}>
-                    {/* <p className="active-dark font-bold text-xl pl-0">{category}</p> */}
-
                     <ul className="ml-0">
                       {Object.entries(subcategories).map(
                         ([subcategory, products], i) => (
@@ -146,7 +147,7 @@ function Cart() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

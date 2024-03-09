@@ -1,8 +1,8 @@
-import { Product, CategorizedProducts } from "@/types";
+import { ProductType, CategorizedProductsType } from "@/types";
 import * as contentful from "contentful";
 import "react-toastify/dist/ReactToastify.css";
 
-import ProductList from "./components/ProductList";
+import CategorizedProducts from "./components/CategorizedProducts";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Cart from "./components/Cart";
@@ -17,7 +17,7 @@ export default async function Home() {
       <Navbar />
       <Menu {...products} />
       <Cart {...products} />
-      <ProductList {...products} />
+      <CategorizedProducts {...products} />
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
@@ -30,14 +30,14 @@ export default async function Home() {
 }
 export const dynamic = "force-static";
 
-type ContentfulImageStruct = {
+type ContentfulImageType = {
   fields: {
     file: {
       url: string;
     };
   };
 }[];
-type ContentfulSubcategoryStruct = {
+type ContentfulSubcategoryType = {
   fields: {
     title: string;
     category: {
@@ -62,12 +62,12 @@ const fetchContentfulProducts = async () => {
     })
   ).items;
 
-  const categorizedProducts = allProductData.reduce(
+  const CategorizedProducts = allProductData.reduce(
     (
-      acc: CategorizedProducts,
+      acc: CategorizedProductsType,
       { fields: { name, price, available, image, subcategory } }
     ) => {
-      const imageURL = (image as ContentfulImageStruct)[0].fields.file.url!;
+      const imageURL = (image as ContentfulImageType)[0].fields.file.url!;
 
       const {
         fields: {
@@ -76,7 +76,7 @@ const fetchContentfulProducts = async () => {
             fields: { title: categoryTitle },
           },
         },
-      } = subcategory as ContentfulSubcategoryStruct;
+      } = subcategory as ContentfulSubcategoryType;
 
       const product = {
         name,
@@ -85,7 +85,7 @@ const fetchContentfulProducts = async () => {
         imageURL,
         category: categoryTitle,
         subcategory: subcategoryTitle,
-      } as Product;
+      } as ProductType;
 
       const category = acc[categoryTitle] && acc[categoryTitle];
 
@@ -105,5 +105,5 @@ const fetchContentfulProducts = async () => {
     },
     {}
   );
-  return categorizedProducts;
+  return CategorizedProducts;
 };

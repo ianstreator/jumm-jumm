@@ -55,10 +55,6 @@ body {
   min-height: 150px;
   max-height: 150px;
 }
-.product-image-dimensions {
-  width: 175px;
-  height: 175px;
-}
 
 .cart-copied {
   @apply !bg-secondary text-center !text-white w-80 mx-auto !mb-4 !rounded-md;

@@ -1,12 +1,12 @@
-import { ProductStructure } from "@/types";
+import { ProductType } from "@/types";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
 import { AiOutlinePlus, AiOutlineMinus, AiOutlineDelete } from "react-icons/ai";
 
 import { AppContext } from "../context";
 
-function CartProduct(product: ProductStructure) {
-  const { name, url, count } = product;
+function CartProduct(product: ProductType) {
+  const { name, imageURL, count } = product;
 
   const [image, setImage] = useState(false);
 
@@ -54,7 +54,7 @@ function CartProduct(product: ProductStructure) {
 
       {image && (
         <Image
-          src={`https:${url}`}
+          src={`https:${imageURL}`}
           width={175}
           height={175}
           alt={name}

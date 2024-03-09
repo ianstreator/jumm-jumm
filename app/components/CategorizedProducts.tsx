@@ -1,8 +1,8 @@
 "use client";
-import { Products } from "@/types";
 import ProductCard from "./ProductCard";
+import { CategorizedProductsType } from "@/types";
 
-function CategorizedProducts(products: Products) {
+function CategorizedProducts(products: CategorizedProductsType) {
   return (
     <div className="overflow-y-scroll grow relative w-full">
       {Object.entries(products).map(
@@ -15,7 +15,7 @@ function CategorizedProducts(products: Products) {
               ([subcategory, products], subcategoryIndex) => (
                 <div
                   key={subcategoryIndex}
-                  id={products[0].name}
+                  id={products[0].name.trim()}
                   className="relative"
                 >
                   <h3 className="sticky top-0 z-30 font-med text-2xl p-2 px-4 bg-info w-fit">
