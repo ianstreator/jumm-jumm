@@ -1,8 +1,8 @@
-import { ProductStructure, Products } from "@/types";
-import contentful from "contentful"
+import { Product, CategorizedProducts } from "@/types";
+import * as contentful from "contentful";
 import "react-toastify/dist/ReactToastify.css";
 
-import CategorizedProducts from "./components/CategorizedProducts";
+import ProductList from "./components/ProductList";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Cart from "./components/Cart";
@@ -11,14 +11,13 @@ import { ToastContainer } from "react-toastify";
 export const revalidate = 3600;
 
 export default async function Home() {
-  const { products } = await fetchContentful();
-
+  const products = await fetchContentfulProducts();
   return (
     <main className="relative h-full flex flex-col items-center justify-between backdrop bg-accent md:px-40">
       <Navbar />
       <Menu {...products} />
-      <Cart />
-      <CategorizedProducts {...products} />
+      <Cart {...products} />
+      <ProductList {...products} />
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
@@ -31,87 +30,80 @@ export default async function Home() {
 }
 export const dynamic = "force-static";
 
-const client = contentful.createClient({
-  space: process.env.SPACE_ID,
-  accessToken: process.env.ACCESS_TOKEN
-})
+type ContentfulImageStruct = {
+  fields: {
+    file: {
+      url: string;
+    };
+  };
+}[];
+type ContentfulSubcategoryStruct = {
+  fields: {
+    title: string;
+    category: {
+      fields: {
+        title: string;
+      };
+    };
+  };
+};
 
-const fetchContentful = async () => {
-  const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
-  const SPACE_ID = process.env.SPACE_ID;
+const accessToken = process.env.ACCESS_TOKEN as string;
+const space = process.env.SPACE_ID as string;
 
-  const BASE_URL = "https://cdn.contentful.com";
+const client = contentful.createClient({ space, accessToken });
 
-  const res = await fetch(
-    `${BASE_URL}/spaces/${SPACE_ID}/entries?content_type=products&include=2&limit=200&access_token=${ACCESS_TOKEN}`
-  );
-  const products: Products = await res
-    .json()
-    .then(({ includes: { Entry, Asset }, items }) => {
-      const imagesMap: any = Object.values(Asset).reduce(
-        (map: any, asset: any) => {
-          map[asset.sys.id] = asset.fields.file.url;
-          return map;
+const fetchContentfulProducts = async () => {
+  const allProductData = (
+    await client.getEntries({
+      content_type: "products",
+      include: 2,
+      limit: 250,
+    })
+  ).items;
+
+  const categorizedProducts = allProductData.reduce(
+    (
+      acc: CategorizedProducts,
+      { fields: { name, price, available, image, subcategory } }
+    ) => {
+      const imageURL = (image as ContentfulImageStruct)[0].fields.file.url!;
+
+      const {
+        fields: {
+          title: subcategoryTitle,
+          category: {
+            fields: { title: categoryTitle },
+          },
         },
-        {}
-      );
+      } = subcategory as ContentfulSubcategoryStruct;
 
-      const categories: { [id: string]: string } = {};
-      const subcategories: {
-        [id: string]: { subcategoryName: string; categoryPointer: string };
-      } = {};
+      const product = {
+        name,
+        price,
+        available,
+        imageURL,
+        category: categoryTitle,
+        subcategory: subcategoryTitle,
+      } as Product;
 
-      for (const entry of Entry) {
-        const isSubcategory = entry.fields.category;
-        const id = entry.sys.id;
-        const title = entry.fields.title;
+      const category = acc[categoryTitle] && acc[categoryTitle];
 
-        if (isSubcategory) {
-          subcategories[id] = {
-            subcategoryName: title,
-            categoryPointer: entry.fields.category.sys.id,
-          };
-        } else {
-          categories[id] = title;
-        }
+      const subcategoryProducts = category && category[subcategoryTitle];
+
+      if (!category) acc[categoryTitle] = {};
+
+      if (!subcategoryProducts) {
+        acc[categoryTitle][subcategoryTitle] = [product];
+      } else {
+        product.available
+          ? subcategoryProducts.unshift(product)
+          : subcategoryProducts.push(product);
       }
 
-      const products = Object.values(items).reduce(
-        (products: Products, item: any) => {
-          const imageID = item.fields.image[0].sys.id;
-          const subcategoryID = item.fields.subcategory.sys.id;
-          const { subcategoryName, categoryPointer } =
-            subcategories[subcategoryID];
-          const categoryName = categories[categoryPointer];
-          const url = imagesMap[imageID];
-
-          delete item.fields.image;
-          delete item.fields.subcategory;
-
-          const product: ProductStructure = {
-            ...item.fields,
-            url,
-            subcategoryName,
-            categoryName,
-          };
-          products[categoryName] = products[categoryName] || {};
-          products[categoryName][subcategoryName] =
-            products[categoryName][subcategoryName] || [];
-          if (item.fields.available) {
-            products[categoryName][subcategoryName].unshift(product);
-
-          } else {
-            products[categoryName][subcategoryName].push(product);
-
-          }
-
-          return products;
-        },
-        {}
-      );
-
-      return products;
-    });
-
-  return { products };
+      return acc;
+    },
+    {}
+  );
+  return categorizedProducts;
 };
