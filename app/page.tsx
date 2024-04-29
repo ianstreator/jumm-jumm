@@ -91,14 +91,16 @@ const fetchContentfulProducts = async () => {
 
       const subcategoryProducts = category && category[subcategoryTitle];
 
-      if (!category) acc[categoryTitle] = {};
+      if (available) {
+        if (!category) acc[categoryTitle] = {};
 
-      if (!subcategoryProducts) {
-        acc[categoryTitle][subcategoryTitle] = [product];
-      } else {
-        product.available
-          ? subcategoryProducts.unshift(product)
-          : subcategoryProducts.push(product);
+        if (!subcategoryProducts) {
+          acc[categoryTitle][subcategoryTitle] = [product];
+        } else {
+          product.available
+            ? subcategoryProducts.unshift(product)
+            : subcategoryProducts.push(product);
+        }
       }
 
       return acc;
