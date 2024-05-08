@@ -15,34 +15,42 @@ function Cart() {
 
   const [cartList, setCartList] = useState("");
 
-  useEffect(() => {
+  const buildCartList = () => {
+    let cartList = "";
+
     if (!Object.keys(cartProducts).length) setCartState(false);
-    setCartList("Carrito total: $" + cartTotal.toFixed(2).toString() + "\n");
+
+    cartList = "Carrito total: $" + cartTotal.toFixed(2).toString() + "\n";
+
     Object.entries(cartProducts).forEach(([category, subcategories]) => {
-      setCartList((curr) =>
-        curr.concat("\n").concat(category.toUpperCase() + "\n")
-      );
+      cartList += "\n" + category.toUpperCase() + "\n";
       Object.entries(subcategories).forEach(([subcategory, products]) => {
-        setCartList((curr) =>
-          curr.concat("\n").concat("  " + subcategory + "\n")
-        );
+        cartList += "\n".concat("  " + subcategory + "\n");
         Object.values(products).forEach(({ name, count }) => {
-          setCartList((curr) =>
-            curr.concat("    " + `${count}x  ` + name + "\n")
-          );
+          cartList += "    " + `${count}x  ` + name + "," + "\n";
         });
       });
     });
+
+    return cartList;
+  };
+
+  useEffect(() => {
+    setCartList(buildCartList());
   }, [cartProducts, setCartState, cartTotal]);
 
   return (
     <div
-      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-accent shadow-xl ${cartState ? "right-0" : "-right-full"
-        } `}
+      className={`absolute custom-transition top-0 z-50 h-full w-fit ${
+        theme === "oscura" ? "bg-primary" : "bg-accent"
+      } shadow-xl ${cartState ? "right-0" : "-right-full"} `}
     >
       <div className="relative flex flex-col overflow-y-scroll w-full h-full">
-
-        <div className={`sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary ${theme === "oscura" && "!bg-accent"} shadow-md`}>
+        <div
+          className={`sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary ${
+            theme === "oscura" && "!bg-accent"
+          } shadow-md`}
+        >
           <div className="flex flex-row w-full items-center justify-between">
             <div className="relative">
               <Image
@@ -53,23 +61,38 @@ function Cart() {
                 alt="logo"
               ></Image>
             </div>
-            <h1 className="text-2xl">{`$${cartTotal.toFixed(2)}`}</h1>
+            <h1 className="text-2xl text-neutral">{`$${cartTotal.toFixed(
+              2
+            )}`}</h1>
           </div>
         </div>
 
-
         <div className="relative flex flex-col overflow-y-scroll">
           <div className="relative w-full grow mb-14">
-
-            <ul className="menu active text-white mb-6 p-4">
+            <ul
+              className={`menu active mb-6 p-4 ${
+                theme === "oscura" ? "!text-white" : "!text-neutral"
+              }`}
+            >
               {Object.entries(cartProducts).map(
                 ([category, subcategories], i) => (
                   <li key={i}>
                     <ul className="ml-0">
                       {Object.entries(subcategories).map(
                         ([subcategory, products], i) => (
-                          <li key={i}>
-                            <p className="active-dark font-bold text-xl pl-0">
+                          <li
+                            key={i}
+                            className=" active:bg-transparent hover:bg-transparent"
+                          >
+                            <p
+                              className={`font-bold text-xl ${
+                                theme === "oscura"
+                                  ? "!text-white"
+                                  : "!text-neutral"
+                              } pl-0
+                              active:!bg-transparent hover:!bg-transparent !cursor-default
+                              `}
+                            >
                               {category + " - " + subcategory}
                             </p>
 
@@ -89,21 +112,54 @@ function Cart() {
               )}
             </ul>
 
-            <div>
-
-
-            </div>
-
+            <div></div>
           </div>
-
         </div>
-
-
       </div>
       <div className="sticky bottom-0 w-full">
-        <div className="h-10 bg-gradient-to-t from-accent to-transparent z-40"></div>
+        <div
+          className={`h-10 bg-gradient-to-t ${
+            theme === "oscura" ? "from-primary" : "from-accent"
+          } to-transparent z-40`}
+        ></div>
 
-        <div className="flex flex-row w-full items-center justify-between bg-accent p-4">
+        <div
+          className={`flex flex-row w-full items-center justify-between ${
+            theme === "oscura" ? "bg-primary" : "bg-accent"
+          } p-4`}
+        >
+          <a
+            onClick={(e) =>
+              !window.confirm("¿Abrir WhatsApp?") && e.preventDefault()
+            }
+            href={`https://api.whatsapp.com/send?phone=584125868522&text=${encodeURIComponent(
+              cartList
+            )}`}
+            title="Store WhatsApp"
+            target="_blank"
+          >
+            <button className="relative overflow-hidden btn btn-sm border-none bg-green-600 w-fit">
+              {/* <div className="absolute z-10 inset-0 bg-gradient-to-tr from-emerald-900 to-green-500 opacity-50"></div> */}
+              <div className="z-50 w-full flex items-center justify-center text-white">
+                WhatsApp
+                <AiOutlineWhatsApp size={20} className="ml-2" />
+              </div>
+            </button>
+          </a>
+
+          {/*
+                  IG.ME LINK BUG WHEN CLICKED IN INSTAGRAM'S EMBEDDED BROWSER VIEW
+            */}
+          {/* <a href={"https://ig.me/m/jummjumm.shop/"} target="_blank">
+              <button className="relative w-40 btn btn-md border-none overflow-hidden rounded-md bg-transparent hover:bg-white">
+                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-fuchsia-700 to-amber-300 opacity-50"></div>
+                <div className="z-50 w-full flex justify-between items-center text-white !font-extrabold">
+                  Instagram
+                  <AiOutlineInstagram size={30} />
+                </div>
+              </button>
+            </a> */}
+
           <button
             onClick={() => {
               navigator.clipboard.writeText(cartList);
@@ -117,44 +173,9 @@ function Cart() {
             copiar lista
             <BsReverseListColumnsReverse />
           </button>
-          {/*
-                  IG.ME LINK BUG WHEN CLICKED IN INSTAGRAM EMBEDDED VIEW
-            */}
-          {/* <a href={"https://ig.me/m/jummjumm.shop/"} target="_blank">
-              <button className="relative w-40 btn btn-md border-none overflow-hidden rounded-md bg-transparent hover:bg-white">
-                <div className="absolute z-10 inset-0 bg-gradient-to-tr from-fuchsia-700 to-amber-300 opacity-50"></div>
-                <div className="z-50 w-full flex justify-between items-center text-white !font-extrabold">
-                  Instagram
-                  <AiOutlineInstagram size={30} />
-                </div>
-              </button>
-            </a> */}
-          <a
-            onClick={(e) =>
-              !window.confirm("¿Abrir WhatsApp?") && e.preventDefault()
-            }
-            href={`https://api.whatsapp.com/send?phone=584125868522&text=${encodeURIComponent(
-              cartList
-            )}`}
-            title="Store WhatsApp"
-            target="_blank"
-          >
-            <button className="relative overflow-hidden btn btn-sm border-none rounded-md bg-transparent hover:bg-white w-fit">
-              <div className="absolute z-10 inset-0 bg-gradient-to-tr from-emerald-900 to-green-500 opacity-50"></div>
-              <div className="z-50 w-full flex items-center justify-center text-white">
-                WhatsApp
-                <AiOutlineWhatsApp size={20} className="ml-2" />
-              </div>
-            </button>
-          </a>
-
-
         </div>
       </div>
-
-
     </div>
-
   );
 }
 
