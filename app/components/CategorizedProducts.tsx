@@ -1,10 +1,22 @@
 "use client";
 import ProductCard from "./ProductCard";
 import { CategorizedProductsType } from "@/types";
+import { useEffect, useContext } from "react";
+import { AppContext } from "../context";
 
 function CategorizedProducts(products: CategorizedProductsType) {
+  const { menuState, setMenuState, cartState, setCartState } = useContext(AppContext)
+  useEffect(() => {
+
+  }, [menuState, cartState])
   return (
-    <div className="overflow-y-scroll grow relative w-full">
+    <div className="overflow-y-scroll grow relative w-full" onScrollCapture={() => {
+      setMenuState(false)
+      setCartState(false)
+    }} onClick={() => {
+      setMenuState(false)
+      setCartState(false)
+    }}>
       {Object.entries(products).map(
         ([category, subcategories], categoryIndex) => (
           <div key={categoryIndex}>

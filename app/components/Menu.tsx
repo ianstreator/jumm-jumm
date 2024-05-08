@@ -2,40 +2,44 @@
 import { CategorizedProductsType } from "@/types";
 import { useContext } from "react";
 import { AppContext } from "../context";
+import Image from "next/image";
 
 import { IoMdClose } from "react-icons/io";
 
 function Menu(products: CategorizedProductsType) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
-  const themes = ["Oscura", "Rosa", "Azul"];
+  const themes = ["oscura", "rosa", "azul"];
 
   return (
     <div
-      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-secondary shadow-xl ${
-        menuState ? "left-0" : "-left-full"
-      } `}
+      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${menuState ? "left-0" : "-left-full"
+        } `}
     >
-      <div className="flex w-full justify-between p-4 shadow-md">
+      <div className="flex w-full justify-between items-center p-2 px-4 shadow-md bg-secondary">
+        <div className="relative">
+          <Image
+            onClick={() => setMenuState(false)}
+            src={"/jumm-jumm-logo.png"}
+            width={50}
+            height={50}
+            alt="logo"
+          ></Image>
+        </div>
         <h2 className="text-white font-bold text-2xl">MENÚ</h2>
-        <IoMdClose
-          onClick={() => setMenuState(false)}
-          color="white"
-          size={30}
-          className="cursor-pointer"
-        />
+
       </div>
       <ul className="menu grow overflow-y-scroll flex flex-col flex-nowrap pr-4">
         {Object.entries(products).map(([category, subcategories], i) => {
           return (
             <li key={i} className="w-full">
               <details>
-                <summary className="font-bold text-xl">{category}</summary>
+                <summary className="font-bold text-xl bg-secondary m-2 hover:!bg-neutral hover:!text-white">{category}</summary>
                 <ul>
                   {Object.entries(subcategories).map(
                     ([subcategory, products], i) => {
                       return (
-                        <li key={i} className="bg-black/5 my-1 rounded-md">
+                        <li key={i} className="bg-secondary/70 my-4 mr-2 rounded-md hover:!bg-neutral">
                           <a
                             href={`#${products[0].name.trim()}`}
                             onClick={() => setMenuState(false)}
@@ -53,18 +57,17 @@ function Menu(products: CategorizedProductsType) {
           );
         })}
       </ul>
-      <div className="menu flex flex-row flex-nowrap items-center bg-neutral/10 py-4 font-bold text-white">
+      <div className="menu menu-children flex flex-row flex-nowrap items-center bg-secondary py-4 font-bold text-white ">
         <h1 className="text-xl px-2">Tema:</h1>
         <ul className="flex flex-row w-full justify-between items-center">
           {themes.map((themeName, i) => (
             <li
               key={i}
-              className={`${
-                theme === themeName && "bg-green-300 text-neutral rounded-md"
-              }`}
+              className={`${theme === themeName && "bg-green-300 text-neutral first-letter:uppercase rounded-md"
+                }`}
               onClick={() => setTheme(themeName)}
             >
-              <p>{themeName}</p>
+              <p className="capitalize">{themeName}</p>
             </li>
           ))}
         </ul>

@@ -1,18 +1,36 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { AppContext } from "../context";
+import { RxHamburgerMenu } from "react-icons/rx";
+
+
 
 function Navbar() {
   const { setMenuState, setCartState, cartProducts, cartCount } = useContext(AppContext);
- 
+
+  const countRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    if (countRef.current) {
+      countRef.current.style.scale = "1.1"
+
+      setTimeout(() => {
+        if (countRef.current)
+          countRef.current.style.scale = "1"
+      }, 100);
+    }
+
   }, [cartCount]);
 
   return (
-    <nav className="bg-primary w-full grow-0 flex items-center justify-between p-2 px-6">
-      <button
+    <nav className="bg-accent w-full grow-0 flex items-center justify-between p-2 px-6">
+      <RxHamburgerMenu size={35} strokeWidth={0.25} cursor="pointer" color="#262626" onClick={() => {
+        setMenuState(true);
+        setCartState(false);
+      }} />
+
+      {/* <button
         className="btn btn-sm bg-secondary text-white border-none rounded-md"
         onClick={() => {
           setMenuState(true);
@@ -20,12 +38,12 @@ function Navbar() {
         }}
       >
         menú
-      </button>
+      </button> */}
       <div className="relative">
         <Image
           src={"/jumm-jumm-logo.png"}
-          width={60}
-          height={60}
+          width={50}
+          height={50}
           alt="logo"
         ></Image>
       </div>
@@ -40,7 +58,7 @@ function Navbar() {
       >
         <Image src={"/basket.svg"} width={50} height={50} alt="basket"></Image>
         {cartCount > 0 && (
-          <div className="absolute left-6 rounded-full bg-secondary text-white flex flex-col justify-center items-center w-8 h-8 p-3">
+          <div ref={countRef} className="absolute left-6 rounded-full bg-secondary text-white flex flex-col justify-center items-center w-8 h-8 p-3 transition-all">
             {cartCount}
           </div>
         )}

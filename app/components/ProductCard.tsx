@@ -19,7 +19,7 @@ function ProductCard({
     <div
       key={name}
       id={name}
-      className="card rounded-sm bg-primary shadow-lg my-2 mx-1 max-w-[180px] sm:mr-4 md:mr-8"
+      className="card rounded-sm bg-accent shadow-lg my-2 mx-1 max-w-[180px] sm:mr-4 md:mr-8"
     >
       <Image
         priority={priority}

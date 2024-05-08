@@ -13,11 +13,12 @@ export const revalidate = 3600;
 export default async function Home() {
   const products = await fetchContentfulProducts();
   return (
-    <main className="relative h-full flex flex-col items-center justify-between backdrop bg-accent md:px-40">
-      <Navbar />
+    <main className="relative h-screen w-screen flex flex-col items-center justify-between backdrop bg-primary md:px-40">
+      
       <Menu {...products} />
-      <Cart {...products} />
+      <Cart />
       <CategorizedProducts {...products} />
+      <Navbar />
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
