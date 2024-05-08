@@ -24,21 +24,12 @@ function Navbar() {
   }, [cartCount]);
 
   return (
-    <nav className="bg-accent w-full grow-0 flex items-center justify-between p-2 px-6">
+    <nav className="bg-accent w-full grow-0 flex items-center justify-between p-2 px-6 shadow-[0px_-4px_10px_0px_rgba(0,0,0,0.15)] z-30">
       <RxHamburgerMenu size={35} strokeWidth={0.25} cursor="pointer" color="#262626" onClick={() => {
         setMenuState(true);
         setCartState(false);
       }} />
 
-      {/* <button
-        className="btn btn-sm bg-secondary text-white border-none rounded-md"
-        onClick={() => {
-          setMenuState(true);
-          setCartState(false);
-        }}
-      >
-        menú
-      </button> */}
       <div className="relative">
         <Image
           src={"/jumm-jumm-logo.png"}
