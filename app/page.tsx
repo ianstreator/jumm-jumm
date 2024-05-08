@@ -20,7 +20,7 @@ export default async function Home() {
       <CategorizedProducts {...products} />
       <Navbar />
       <ToastContainer
-        position="bottom-center"
+        position="top-center"
         autoClose={3000}
         closeButton={false}
         theme="dark"
