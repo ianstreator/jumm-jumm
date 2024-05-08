@@ -17,17 +17,20 @@ function Cart() {
 
   const buildCartList = () => {
     let cartList = "";
+    const escape = "\n";
+    const subcategoryPrefix = "\n  ";
+    const productPrefix = "    ";
 
     if (!Object.keys(cartProducts).length) setCartState(false);
 
-    cartList = "Carrito total: $" + cartTotal.toFixed(2).toString() + "\n";
+    cartList = "Carrito total: $" + cartTotal.toFixed(2).toString() + escape;
 
     Object.entries(cartProducts).forEach(([category, subcategories]) => {
-      cartList += "\n" + category.toUpperCase() + "\n";
+      cartList += escape + category.toUpperCase() + escape;
       Object.entries(subcategories).forEach(([subcategory, products]) => {
-        cartList += "\n".concat("  " + subcategory + "\n");
+        cartList += subcategoryPrefix + subcategory + escape;
         Object.values(products).forEach(({ name, count }) => {
-          cartList += "    " + `${count}x  ` + name + "," + "\n";
+          cartList += productPrefix + `${count}x  ` + name + "," + escape;
         });
       });
     });
