@@ -36,11 +36,14 @@ body {
 
 .active {
   background-color: transparent !important;
+  cursor: default;
   color: white !important;
 }
+
 .active-dark {
   background-color: transparent !important;
-  color: #262626 !important;
+  /* color: #262626 !important; */
+  color: white !important;
   cursor: default !important;
 }
 
