@@ -13,7 +13,7 @@ export const revalidate = 3600;
 export default async function Home() {
   const products = await fetchContentfulProducts();
   return (
-    <main className="relative h-screen w-screen flex flex-col items-center justify-between backdrop bg-primary md:px-40">
+    <main className="relative max-h-[100dvh] w-screen flex flex-col items-center justify-between backdrop bg-primary md:px-40">
       
       <Menu {...products} />
       <Cart />
