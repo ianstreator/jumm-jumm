@@ -127,7 +127,7 @@ function Cart() {
         ></div>
 
         <div
-          className={`flex flex-row w-full items-center justify-between ${
+          className={`flex flex-row w-full items-center justify-around ${
             theme === "oscura" ? "bg-primary" : "bg-accent"
           } p-4`}
         >
