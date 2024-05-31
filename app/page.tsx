@@ -11,13 +11,14 @@ import { ToastContainer } from "react-toastify";
 export const revalidate = 3600;
 
 export default async function Home() {
-  const products = await fetchContentfulProducts();
+  const categorizedProducts = await fetchContentfulProducts();
+
   return (
     <main className="relative max-h-[100dvh] w-screen flex flex-col items-center justify-between backdrop bg-primary md:px-40">
-      
-      <Menu {...products} />
+
+      <Menu {...categorizedProducts} />
       <Cart />
-      <CategorizedProducts {...products} />
+      <CategorizedProducts {...categorizedProducts} />
       <Navbar />
       <ToastContainer
         position="top-center"
@@ -63,7 +64,7 @@ const fetchContentfulProducts = async () => {
     })
   ).items;
 
-  const CategorizedProducts = allProductData.reduce(
+  const categorizedProducts = allProductData.reduce(
     (
       acc: CategorizedProductsType,
       { fields: { name, price, available, image, subcategory } }
@@ -88,6 +89,8 @@ const fetchContentfulProducts = async () => {
         subcategory: subcategoryTitle,
       } as ProductType;
 
+
+
       const category = acc[categoryTitle] && acc[categoryTitle];
 
       const subcategoryProducts = category && category[subcategoryTitle];
@@ -108,5 +111,5 @@ const fetchContentfulProducts = async () => {
     },
     {}
   );
-  return CategorizedProducts;
+  return categorizedProducts;
 };

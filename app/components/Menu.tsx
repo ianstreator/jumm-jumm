@@ -6,16 +6,15 @@ import Image from "next/image";
 
 import { IoMdClose } from "react-icons/io";
 
-function Menu(products: CategorizedProductsType) {
+function Menu(categorizedProducts: CategorizedProductsType) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
   const themes = ["oscura", "rosa", "azul"];
 
   return (
     <div
-      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${
-        menuState ? "left-0" : "-left-full"
-      } `}
+      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${menuState ? "left-0" : "-left-full"
+        } `}
     >
       <div className="flex w-full justify-between items-center p-2 px-4 shadow-md bg-secondary">
         <div className="relative">
@@ -30,7 +29,7 @@ function Menu(products: CategorizedProductsType) {
         <h2 className="text-white font-bold text-2xl">MENÚ</h2>
       </div>
       <ul className="menu grow overflow-y-scroll flex flex-col flex-nowrap pr-4">
-        {Object.entries(products).map(([category, subcategories], i) => {
+        {Object.entries(categorizedProducts).map(([category, subcategories], i) => {
           return (
             <li key={i} className="w-full">
               <details>
@@ -68,11 +67,10 @@ function Menu(products: CategorizedProductsType) {
           {themes.map((themeName, i) => (
             <li
               key={i}
-              className={`${
-                theme === themeName
+              className={`${theme === themeName
                   ? "bg-green-300 text-neutral hover:!text-neutral rounded-md"
                   : "hover:bg-black/40 rounded-md"
-              }`}
+                }`}
               onClick={() => setTheme(themeName)}
             >
               <p className="capitalize">{themeName}</p>

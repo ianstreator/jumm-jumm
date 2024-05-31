@@ -4,7 +4,7 @@ import { CategorizedProductsType } from "@/types";
 import { useEffect, useContext } from "react";
 import { AppContext } from "../context";
 
-function CategorizedProducts(products: CategorizedProductsType) {
+function CategorizedProducts(categorizedProducts: CategorizedProductsType) {
   const { menuState, setMenuState, cartState, setCartState } = useContext(AppContext)
   useEffect(() => {
 
@@ -17,7 +17,7 @@ function CategorizedProducts(products: CategorizedProductsType) {
       setMenuState(false)
       setCartState(false)
     }}>
-      {Object.entries(products).map(
+      {Object.entries(categorizedProducts).map(
         ([category, subcategories], categoryIndex) => (
           <div key={categoryIndex}>
             <h1 className="sticky top-0 z-30 font-bold text-white bg-secondary text-2xl text-end w-full p-2 px-4 shadow-md">

@@ -42,7 +42,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     if (cartProduct) return increaseProductCartCount(cartProduct);
 
     setCartTotal((total) => total + price);
-    setCartCount((count) => (count += 1));
+    setCartCount((count) => count + 1);
     const newCartProduct: ProductType = { ...product, count: 1 };
 
     setCartProducts((curr) => {
@@ -63,7 +63,7 @@ export const AppContextProvider = ({ children }: ContextProps) => {
     const { name, count, price, category, subcategory } = product;
 
     setCartTotal((total) => total + price);
-    setCartCount((count) => (count += 1));
+    setCartCount((count) => count + 1);
     setCartProducts((curr) => {
       return {
         ...curr,
@@ -80,8 +80,8 @@ export const AppContextProvider = ({ children }: ContextProps) => {
 
   const decreaseProductCartCount = (product: ProductType) => {
     const { name, count, price, category, subcategory } = product;
-    setCartTotal((total) => (total -= price));
-    setCartCount((count) => (count -= 1));
+    setCartTotal((total) => total - price);
+    setCartCount((count) => count - 1);
 
     const { productCount, subcategoryLength, categoryLength } =
       checkProductCountAndHierarchy(product);
