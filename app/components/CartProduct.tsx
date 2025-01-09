@@ -16,18 +16,10 @@ function CartProduct(product: ProductType) {
   return (
     <>
       <div
-        className={`relative w-fit my-2 p-0 overflow-hidden active:!bg-transparent hover:!bg-transparent shadow-md ${
-          theme === "oscura" ? "!text-white" : "!text-neutral"
-        }`}
+        className={`relative w-fit my-2 p-0 overflow-hidden active:!bg-transparent hover:!bg-transparent shadow-md`}
       >
         <button
           onClick={() => {
-            if (count! < 2) {
-              return (
-                confirm("¿Quitar artículo del carrito?") &&
-                decreaseProductCartCount(product)
-              );
-            }
             decreaseProductCartCount(product);
           }}
           className="btn btn-lg rounded-r-none w-10 text-white  border-none p-1 transform-none bg-secondary"
@@ -40,9 +32,7 @@ function CartProduct(product: ProductType) {
         </button>
         <div
           onClick={() => setImage(!image)}
-          className={`flex flex-row py-2 items-center justify-center ${
-            theme === "oscura" ? "!text-white" : "!text-neutral"
-          }`}
+          className={`flex flex-row py-2 items-center justify-center !text-neutral`}
         >
           <p className="w-36 h-10 pl-2 whitespace-normal text-start font-bold flex items-center justify-start cursor-pointer">
             {name}

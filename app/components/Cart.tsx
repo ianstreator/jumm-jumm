@@ -44,15 +44,13 @@ function Cart() {
 
   return (
     <div
-      className={`absolute custom-transition top-0 z-50 h-full w-fit ${
-        theme === "oscura" ? "bg-primary" : "bg-accent"
-      } shadow-xl ${cartState ? "right-0" : "-right-full"} `}
+      className={`absolute custom-transition top-0 z-50 h-full w-fit bg-accent shadow-xl ${
+        cartState ? "right-0" : "-right-full"
+      } `}
     >
       <div className="relative flex flex-col overflow-y-scroll w-full h-full">
         <div
-          className={`sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary ${
-            theme === "oscura" && "!bg-accent"
-          } shadow-md`}
+          className={`sticky top-0 z-50 p-2 px-4 items-center flex flex-col bg-primary shadow-md`}
         >
           <div className="flex flex-row w-full items-center justify-between">
             <div className="relative">
@@ -72,11 +70,7 @@ function Cart() {
 
         <div className="relative flex flex-col overflow-y-scroll">
           <div className="relative w-full grow mb-14">
-            <ul
-              className={`menu active mb-6 p-4 ${
-                theme === "oscura" ? "!text-white" : "!text-neutral"
-              }`}
-            >
+            <ul className="menu active mb-6 p-4 !text-neutral">
               {Object.entries(cartProducts).map(
                 ([category, subcategories], i) => (
                   <li key={i}>
@@ -88,12 +82,8 @@ function Cart() {
                             className=" active:bg-transparent hover:bg-transparent"
                           >
                             <p
-                              className={`font-bold text-xl ${
-                                theme === "oscura"
-                                  ? "!text-white"
-                                  : "!text-neutral"
-                              } pl-0
-                              active:!bg-transparent hover:!bg-transparent !cursor-default
+                              className={`font-bold text-xl pl-0
+                              active:!bg-transparent !text-neutral hover:!bg-transparent !cursor-default
                               `}
                             >
                               {category + " - " + subcategory}
@@ -121,15 +111,11 @@ function Cart() {
       </div>
       <div className="sticky bottom-0 w-full">
         <div
-          className={`h-10 bg-gradient-to-t ${
-            theme === "oscura" ? "from-primary" : "from-accent"
-          } to-transparent z-40`}
+          className={`h-10 bg-gradient-to-t from-primary to-transparent z-40`}
         ></div>
 
         <div
-          className={`flex flex-row w-full items-center justify-between ${
-            theme === "oscura" ? "bg-primary" : "bg-accent"
-          } p-4`}
+          className={`flex flex-row w-full items-center justify-around bg-primary p-4`}
         >
           <a
             onClick={(e) =>

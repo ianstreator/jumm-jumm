@@ -4,20 +4,18 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../context";
 import Image from "next/image";
 
-import { IoMdClose } from "react-icons/io";
-
 function Menu(products: CategorizedProductsType) {
   const { menuState, setMenuState, theme, setTheme } = useContext(AppContext);
 
-  const themes = ["oscura", "rosa", "azul"];
+  const themes = ["rosa", "azul"];
 
   return (
     <div
-      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit bg-primary shadow-xl ${
+      className={`flex flex-col text-white absolute overflow-hidden custom-transition top-0 z-50 h-full w-fit min-w-[300px] bg-white shadow-xl ${
         menuState ? "left-0" : "-left-full"
       } `}
     >
-      <div className="flex w-full justify-between items-center p-2 px-4 shadow-md bg-secondary">
+      <div className="flex w-full justify-between items-center p-2 px-4 shadow-md bg-primary">
         <div className="relative">
           <Image
             onClick={() => setMenuState(false)}
@@ -27,7 +25,7 @@ function Menu(products: CategorizedProductsType) {
             alt="logo"
           ></Image>
         </div>
-        <h2 className="text-white font-bold text-2xl">MENÚ</h2>
+        <h2 className="text-neutral font-bold text-2xl">MENÚ</h2>
       </div>
       <ul className="menu grow overflow-y-scroll flex flex-col flex-nowrap pr-4">
         {Object.entries(products).map(([category, subcategories], i) => {
@@ -43,7 +41,7 @@ function Menu(products: CategorizedProductsType) {
                       return (
                         <li
                           key={i}
-                          className="bg-secondary/70 my-4 mr-2 rounded-md hover:!bg-neutral"
+                          className="bg-secondary/80 my-4 mr-2 rounded-md hover:!bg-neutral"
                         >
                           <a
                             href={`#${products[0].name.trim()}`}
@@ -62,9 +60,9 @@ function Menu(products: CategorizedProductsType) {
           );
         })}
       </ul>
-      <div className="menu flex flex-row flex-nowrap items-center bg-secondary py-4 font-bold text-white ">
+      <div className="menu flex flex-row flex-nowrap items-center bg-primary py-4 font-bold text-black">
         <h1 className="text-xl px-2">Tema:</h1>
-        <ul className="flex flex-row w-full justify-between items-center">
+        <ul className="flex flex-row w-full justify-around items-center">
           {themes.map((themeName, i) => (
             <li
               key={i}

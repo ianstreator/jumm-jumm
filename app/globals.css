@@ -28,10 +28,9 @@
 
 html,
 body {
-  background-color: #4a4a4a;
-  color: #262626;
-  overflow: hidden;
-  height: 100dvh;
+  @apply bg-primary !text-neutral overflow-hidden h-[100dvh];
+  background-image: url("../public/backdrop.svg");
+  scroll-padding: 20rem;
 }
 
 .active {
@@ -42,7 +41,6 @@ body {
 
 .active-dark {
   background-color: transparent !important;
-  /* color: #262626 !important; */
   color: white !important;
   cursor: default !important;
 }
