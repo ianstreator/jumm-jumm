@@ -13,8 +13,8 @@ export const revalidate = 3600;
 export default async function Home() {
   const products = await fetchContentfulProducts();
   return (
-    <main className="relative h-screen w-screen flex flex-col items-center justify-between md:px-40">
-      <div className="order-last md:order-first w-full sticky z-50">
+    <main className="relative h-full w-full flex flex-col items-center justify-between md:px-40">
+      <div className="order-last md:order-first w-full sticky z-50 bottom-0">
         <Navbar />
       </div>
 

@@ -28,9 +28,11 @@
 
 html,
 body {
-  @apply bg-primary !text-neutral overflow-hidden h-[100dvh];
+  @apply bg-primary !text-neutral;
   background-image: url("../public/backdrop.svg");
   scroll-padding: 20rem;
+  overflow: hidden;
+  height: 100dvh;
 }
 
 .active {
